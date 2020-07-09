@@ -1,7 +1,14 @@
 import React from 'react';
 import '../styles/header.scss';
 // import { Link } from 'react-router-dom';
-
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 /**
  * Simple header content that shows up on every page. Contains title and nav bar
  *
@@ -35,9 +42,15 @@ function Header() {
   // }
 
   return (
-    <div id="main-header">
-      <h1>Dat Header</h1>
-    </div>
+    <AppBar position="static" id="main-header">
+      <Toolbar>
+        <IconButton edge="start" color="inherit" aria-label="menu">
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6">Dat Shopping App</Typography>
+        <Button color="inherit">Login</Button>
+      </Toolbar>
+    </AppBar>
   );
 }
 

@@ -13,7 +13,7 @@ function Categories(props) {
           variant="contained"
           color="secondary"
           key={i}
-          onClick={(e) => {
+          onClick={() => {
             props.dispatch({
               type: 'CHANGE_CATEGORY',
               payload: category.name,
