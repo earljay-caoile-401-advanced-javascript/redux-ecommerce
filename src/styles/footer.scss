@@ -1,0 +1,23 @@
+@import 'variables';
+
+#main-footer {
+  background-color: $darkBlue;
+  flex-direction: column;
+  font-family: Arial;
+
+  svg {
+    margin: auto $spacing;
+  }
+
+  * {
+    color: white;
+  }
+
+  p {
+    padding-top: $spacing / 2;
+  }
+
+  .url-icons {
+    padding-bottom: $spacing / 2;
+  }
+}
