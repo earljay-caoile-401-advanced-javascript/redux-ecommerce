@@ -37,7 +37,7 @@ function Categories(props) {
   }
 
   return (
-    <div className="cont-child">
+    <div id="categories" className="cont-child">
       <h2>Browse our Categories</h2>
       <Select value={props.currentCategory.name} className="cat-select">
         {catsToRender}

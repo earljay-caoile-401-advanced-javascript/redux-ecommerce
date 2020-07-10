@@ -9,10 +9,13 @@ const initState = {
 };
 
 const reducer = (state = initState, action) => {
-  let newState = { ...state };
+  const newState = { ...state };
 
   switch (action.type) {
     case 'ADD_TO_CART':
+      newState.addedItem = action.payload;
+      newState.cart++;
+      action.payload.stock--;
       break;
     case 'CHANGE_CATEGORY':
       newState.currentCategory = action.payload;

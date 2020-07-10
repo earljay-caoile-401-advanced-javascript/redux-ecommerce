@@ -11,6 +11,16 @@ import {
   Grid,
 } from '@material-ui/core';
 
+/**
+ * Component that renders the list of products as cards
+ * Grabs the products and currentCategory states from the Redux store to map state to props.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Products />
+ * )
+ */
 function Products(props) {
   const prodsToRender = [];
   const propProds = props.products;
@@ -30,9 +40,12 @@ function Products(props) {
                   title={product.displayName || product.name}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {product.displayName || product.name}
-                  </Typography>
+                  <Grid container direction="row" justify="space-between">
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {product.displayName || product.name}
+                    </Typography>
+                    <Typography>{product.price + ' G'}</Typography>
+                  </Grid>
                   <Typography
                     variant="body2"
                     color="textSecondary"
@@ -43,7 +56,17 @@ function Products(props) {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button
+                  size="small"
+                  color="primary"
+                  disabled={!product.stock}
+                  onClick={() => {
+                    props.dispatch({
+                      type: 'ADD_TO_CART',
+                      payload: product,
+                    });
+                  }}
+                >
                   Add to Cart
                 </Button>
                 <Button size="small" color="primary">
@@ -58,7 +81,7 @@ function Products(props) {
   }
 
   return (
-    <div className="cont-child">
+    <div id="products" className="cont-child">
       <h2>Products</h2>
       <Grid container spacing={4} direction="row" className="prod-grid">
         {prodsToRender}
@@ -71,6 +94,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.products,
     currentCategory: state.currentCategory,
+    addedItem: state.addedItem,
   };
 };
 
