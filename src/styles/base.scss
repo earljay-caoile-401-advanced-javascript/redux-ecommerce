@@ -68,11 +68,6 @@ code {
   box-sizing: border-box;
 }
 
-#main-header {
-  min-height: 5vh;
-  position: fixed;
-}
-
 #main-content,
 #main-footer {
   justify-content: center;
@@ -104,9 +99,8 @@ code {
     padding: $spacing * 2.5 $spacing;
   }
 
-  @media (max-width: 314px) {
-    margin: 0;
-    margin-top: 12vh;
+  .cont-child {
+    margin: 2em auto;
   }
 
   @media (max-height: 1080px) {

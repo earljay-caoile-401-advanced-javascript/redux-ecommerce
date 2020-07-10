@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import '../styles/header.scss';
 // import { Link } from 'react-router-dom';
 import {
@@ -8,7 +9,20 @@ import {
   Typography,
   Button,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 /**
  * Simple header content that shows up on every page. Contains title and nav bar
  *
@@ -18,40 +32,34 @@ import MenuIcon from '@material-ui/icons/Menu';
  *   <Header />
  * )
  */
-function Header() {
-  // const links = [
-  //   { displayName: 'Home', url: '/' },
-  //   { displayName: 'Something', url: '/something' },
-  // ];
-
-  // const navLinks = [];
-
-  // const [expanded, setExpanded] = useState(false);
-
-  // for (let i = 0; i < links.length; i++) {
-  //   navLinks.push(
-  //     <Link
-  //       className="nav-link"
-  //       key={i}
-  //       to={links[i].url}
-  //       onClick={() => setTimeout(() => setExpanded(false), 100)}
-  //     >
-  //       {links[i].displayName}
-  //     </Link>
-  //   );
-  // }
+function Header(props) {
+  const classes = useStyles();
 
   return (
-    <AppBar position="static" id="main-header">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6">Dat Shopping App</Typography>
-        <Button color="inherit">Login</Button>
-      </Toolbar>
-    </AppBar>
+    <div className={classes.root}>
+      <AppBar position="fixed" id="main-header">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Dat Online Store
+          </Typography>
+          <Button color="inherit">{`Cart (${props.cart})`}</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+export default connect(mapStateToProps)(Header);

@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Select, MenuItem } from '@material-ui/core';
 
 function Categories(props) {
-  const [chosenCategory, setChosenCategory] = useState(
-    props.categories[0].name || ''
-  );
   const catsToRender = [];
   const propCats = props.categories;
 
@@ -18,9 +15,8 @@ function Categories(props) {
           onClick={() => {
             props.dispatch({
               type: 'CHANGE_CATEGORY',
-              payload: category.name,
+              payload: category,
             });
-            setChosenCategory(category.name);
           }}
         >
           {category.displayName || category.name}
@@ -30,16 +26,19 @@ function Categories(props) {
   }
 
   return (
-    <>
-      <h2>Categories</h2>
-      <Select value={chosenCategory}>{catsToRender}</Select>
-    </>
+    <div className="cont-child">
+      <h2>Browse our Categories</h2>
+      <Select value={props.currentCategory.name} style={{ padding: '0.5em' }}>
+        {catsToRender}
+      </Select>
+    </div>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
     categories: state.categories,
+    currentCategory: state.currentCategory,
   };
 };
 

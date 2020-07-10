@@ -1,0 +1,117 @@
+{
+  "categories": [
+    {
+      "_id": "5e810625ed0676292430be68",
+      "name": "mythical_weapons",
+      "displayName": "Mythical Weapons",
+      "description": "I shall smite thee!",
+      "__v": 0
+    },
+    {
+      "_id": "5e81063bed0676292430be69",
+      "name": "health_house_baby",
+      "displayName": "Health, Household, and Baby Care",
+      "description": "Stuff fo yo crib!",
+      "__v": 0
+    },
+    {
+      "_id": "5e810645ed0676292430be6a",
+      "name": "electronics",
+      "displayName": "Electronics",
+      "description": "Beep boop bzzt!",
+      "__v": 0
+    },
+    {
+      "_id": "5e810645ed0676292430be6b",
+      "name": "food",
+      "displayName": "Food",
+      "description": "Nom nom nom!",
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "name": "TV",
+      "description": "See all the things",
+      "stock": 5,
+      "price": 400,
+      "category": "electronics"
+    },
+    {
+      "name": "Macbook",
+      "description": "Do all the things",
+      "stock": 7,
+      "price": 1200,
+      "category": "electronics"
+    },
+    {
+      "name": "Carrot",
+      "description": "Crunch all the things",
+      "stock": 25,
+      "price": 0.3,
+      "category": "food"
+    },
+    {
+      "name": "Cake",
+      "description": "Lie all the things",
+      "stock": 10,
+      "price": 5,
+      "category": "food"
+    },
+    {
+      "name": "Divine Rapier",
+      "description": "So powerful, it cannot have a single owner.",
+      "stock": 1,
+      "price": 6000,
+      "category": "mythical_weapons"
+    },
+    {
+      "category": "mythical_weapons",
+      "name": "mjolnir",
+      "displayName": "Mjolnir",
+      "description": "Thor's magical hammer, made for him by the dwarves Brok and Eitri.",
+      "stock": 1,
+      "price": 5600
+    },
+    {
+      "category": "mythical_weapons",
+      "name": "gungnir",
+      "displayName": "Gungnir",
+      "stock": 1,
+      "price": 5555,
+      "description": "Odin's spear. It supposedly doesn't miss..."
+    },
+    {
+      "category": "health_house_baby",
+      "name": "adhesive_medical_strips",
+      "displayName": "Adhesive Medical Strips",
+      "description": "We can't use band-aid since that's a copyrighted company name, but that's pretty much what it is...",
+      "stock": 1,
+      "price": 5600
+    },
+    {
+      "category": "electronics",
+      "name": "amd_ryzen_9_3950x",
+      "displayName": "AMD Ryzen 9 3950X",
+      "description": "16 cores, 32 threads, dank level over 9000!",
+      "stock": 420,
+      "price": 750
+    },
+    {
+      "category": "electronics",
+      "name": "intel_core_i9_9900k",
+      "displayName": "Intel Core i9-9900k",
+      "description": "That's a funny way to spell 'Shintel'!",
+      "stock": 50,
+      "price": 500
+    },
+    {
+      "category": "electronics",
+      "name": "sennheiser_hd_650",
+      "displayName": "Sennheiser HD 650",
+      "description": "open cans for dat muzak",
+      "stock": 420,
+      "price": 300
+    }
+  ]
+}

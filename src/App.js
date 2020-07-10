@@ -5,6 +5,7 @@ import store from './store';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Categories from './components/Categories';
+import ActiveCategory from './components/ActiveCategory';
 import Products from './components/Products';
 import './styles/base.scss';
 
@@ -22,8 +23,8 @@ function App() {
     <Provider store={store}>
       <Header />
       <div id="main-content">
-        <h1>Main Content</h1>
         <Categories />
+        <ActiveCategory />
         <Products />
       </div>
       <Footer />

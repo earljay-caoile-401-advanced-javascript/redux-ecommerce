@@ -17,8 +17,7 @@ function Products(props) {
 
   if (propProds) {
     propProds.forEach((product, i) => {
-      if (product.category === props.currentCategory) {
-        console.log('current product:', product);
+      if (product.category === props.currentCategory.name) {
         prodsToRender.push(
           <Grid item xs={12} sm={6} md={4} xl={3} key={i}>
             <Card>
@@ -27,8 +26,8 @@ function Products(props) {
                   component="img"
                   alt={`Image of ${product.displayName || product.name}`}
                   height="140"
-                  image="/static/images/cards/contemplative-reptile.jpg"
-                  title="Contemplative Reptile"
+                  image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg?w=1000&h=600&crop=1"
+                  title={product.displayName || product.name}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -45,10 +44,10 @@ function Products(props) {
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary">
-                  Share
+                  Add to Cart
                 </Button>
                 <Button size="small" color="primary">
-                  Learn More
+                  View Details
                 </Button>
               </CardActions>
             </Card>
@@ -59,12 +58,12 @@ function Products(props) {
   }
 
   return (
-    <>
+    <div className="cont-child">
       <h2>Products</h2>
       <Grid container spacing={4} direction="row" className="prod-grid">
         {prodsToRender}
       </Grid>
-    </>
+    </div>
   );
 }
 
