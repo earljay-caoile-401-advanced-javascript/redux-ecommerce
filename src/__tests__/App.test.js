@@ -9,6 +9,23 @@ describe('app component', () => {
     expect(component).toBeDefined();
 
     const categories = component.find('#categories');
-    expect(categories).toBeDefined();
+    const products = component.find('#products');
+    expect(categories).toHaveLength(1);
+    expect(products).toHaveLength(1);
+
+    const catText = categories.text();
+    const prodText = products.text();
+    expect(catText.includes('Browse our Categories')).toBeTruthy();
+    expect(catText.includes(sampleData.categories[0].displayName)).toBeTruthy();
+
+    let expectedProds = sampleData.products.filter(
+      (product) => product.category === sampleData.categories[0].name
+    );
+
+    expectedProds.forEach((product) => {
+      expect(
+        prodText.includes(product.displayName || product.name)
+      ).toBeTruthy();
+    });
   });
 });

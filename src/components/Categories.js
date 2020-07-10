@@ -21,6 +21,7 @@ function Categories(props) {
     propCats.forEach((category, i) => {
       catsToRender.push(
         <MenuItem
+          className="menu-item"
           value={category.name}
           key={i}
           onClick={() => {
