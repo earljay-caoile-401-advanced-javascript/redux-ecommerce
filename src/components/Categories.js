@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
+import { Select, MenuItem } from '@material-ui/core';
 
 function Categories(props) {
+  const [chosenCategory, setChosenCategory] = useState(
+    props.categories[0].name || ''
+  );
   const catsToRender = [];
   const propCats = props.categories;
 
   if (propCats) {
     propCats.forEach((category, i) => {
       catsToRender.push(
-        <Button
-          variant="contained"
-          color="secondary"
+        <MenuItem
+          value={category.name}
           key={i}
           onClick={() => {
             props.dispatch({
               type: 'CHANGE_CATEGORY',
               payload: category.name,
             });
+            setChosenCategory(category.name);
           }}
         >
           {category.displayName || category.name}
-        </Button>
+        </MenuItem>
       );
     });
   }
 
-  return <>{catsToRender}</>;
+  return (
+    <>
+      <h2>Categories</h2>
+      <Select value={chosenCategory}>{catsToRender}</Select>
+    </>
+  );
 }
 
 const mapStateToProps = (state) => {

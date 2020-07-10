@@ -70,6 +70,7 @@ code {
 
 #main-header {
   min-height: 5vh;
+  position: fixed;
 }
 
 #main-content,
@@ -87,6 +88,30 @@ code {
   min-height: 87.5vh;
   padding: $spacing * 2.5;
   box-sizing: border-box;
+  margin: 5vh 5% auto;
+
+  @media (min-width: 1200px) {
+    margin: 5vh 7.5% auto;
+  }
+
+  @media (min-width: 1920px) {
+    margin: 5vh 10% auto;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    margin-top: 5vh;
+    padding: $spacing * 2.5 $spacing;
+  }
+
+  @media (max-width: 314px) {
+    margin: 0;
+    margin-top: 12vh;
+  }
+
+  @media (max-height: 1080px) {
+    margin-top: $spacing * 8;
+  }
 }
 
 .fade-in {

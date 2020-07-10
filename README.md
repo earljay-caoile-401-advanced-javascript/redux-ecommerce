@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Lab 29
 
-## Available Scripts
+## E-Commerce Store with Material UI
 
-In the project directory, you can run:
+Labs 29 and then some for CF JS 401 Nights
 
-### `npm start`
+### Author: Earl Jay Caoile
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Links and Resources
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+#### Submission Reqs
 
-### `npm test`
+- [submission PR](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/pull/1)
+- [GitHub actions](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/actions)
+- [code sandbox](https://codesandbox.io/s/github/earljay-caoile-401-advanced-javascript/redux-ecommerce/tree/lab-29)
+- [Netlify Deployment](https://elastic-hopper-626eb2.netlify.app/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Resources
 
-### `npm run build`
+- [Three cards in a row instead of all cards in one column](https://stackoverflow.com/questions/51595156/three-cards-in-a-row-instead-of-all-cards-in-one-column)
+- [CSS Gradient](https://cssgradient.io/)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Documentation
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- [React JS Hello World](https://reactjs.org/docs/hello-world.html)
+- [SASS](https://sass-lang.com/)
+- [Enzyme (Set State)](https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/setState.html)
+- [React Font Awesome](https://github.com/FortAwesome/react-fontawesome)
+- [JSON Stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+- [Material UI](https://material-ui.com)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Setup
 
-### `npm run eject`
+- install node packages locally with `npm i` from the root directory in Terminal
+- start the server with `npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Using the App
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- fill out form on the home page
+- click the submit button
+- click the checkbox on tasks page showing your new ToDo task repeatedly to toggle the title
+- repeat the above 3 steps to generate a second task
+- change the number of tasks per page in the top right textbox to create pagination (either clicking the - or + buttons or typing in a number and hitting enter)
+- with the tasks per page set to a number below the number of tasks, click the prev, next, or number buttons to explore the different "pages"
+- delete as many items as you'd like
+- smile
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### UML
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![UML Image](lab-28-uml.png)
