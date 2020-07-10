@@ -36,15 +36,12 @@ Labs 29 and then some for CF JS 401 Nights
 
 ### Using the App
 
-- fill out form on the home page
-- click the submit button
-- click the checkbox on tasks page showing your new ToDo task repeatedly to toggle the title
-- repeat the above 3 steps to generate a second task
-- change the number of tasks per page in the top right textbox to create pagination (either clicking the - or + buttons or typing in a number and hitting enter)
-- with the tasks per page set to a number below the number of tasks, click the prev, next, or number buttons to explore the different "pages"
-- delete as many items as you'd like
+- from the home page, click the dropdown for the categories
+- select different categories and watch the list of products change
+- stop at one category and click "add item to cart"
+- notice the number on the top right increment by one
 - smile
 
 ### UML
 
-![UML Image](lab-28-uml.png)
+![UML Image](lab-29-uml.png)
