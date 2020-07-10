@@ -22,7 +22,7 @@ function App() {
   return (
     <Provider store={store}>
       <Header />
-      <div id="main-content">
+      <div id="main-content" className="fade-in">
         <Categories />
         <ActiveCategory />
         <Products />

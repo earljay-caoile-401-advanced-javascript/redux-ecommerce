@@ -1,8 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
-import '../styles/active-category.scss';
+import '../styles/categories.scss';
 
+/**
+ * Component that renders the name and description of the currently selected category.
+ * Grabs the currentCategory state from the Redux store to map state to props.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ActiveCategory />
+ * )
+ */
 function ActiveCategory(props) {
   return (
     <div id="active-category">

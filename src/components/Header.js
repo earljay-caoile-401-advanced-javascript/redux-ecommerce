@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/header.scss';
-// import { Link } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -62,4 +61,5 @@ const mapStateToProps = (state) => {
     cart: state.cart,
   };
 };
+
 export default connect(mapStateToProps)(Header);
