@@ -13,7 +13,7 @@ Labs 29 and then some for CF JS 401 Nights
 - [submission PR](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/pull/1)
 - [GitHub actions](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/actions)
 - [code sandbox](https://codesandbox.io/s/github/earljay-caoile-401-advanced-javascript/redux-ecommerce/tree/lab-29)
-- [Netlify Deployment](https://elastic-hopper-626eb2.netlify.app/)
+- [Netlify Deployment](https://nifty-goodall-fcbfde.netlify.app/)
 
 #### Resources
 
