@@ -1,4 +1,4 @@
-# Lab 29
+# Lab 29 - Application State with Redux
 
 ## E-Commerce Store with Material UI
 

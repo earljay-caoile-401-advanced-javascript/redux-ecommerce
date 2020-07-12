@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import clsx from 'clsx';
 import { connect } from 'react-redux';
 import '../styles/header.scss';
 import {
@@ -7,18 +8,29 @@ import {
   IconButton,
   Typography,
   Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  SwipeableDrawer,
 } from '@material-ui/core';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+  },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
   },
 }));
 
@@ -33,6 +45,53 @@ const useStyles = makeStyles((theme) => ({
  */
 function Header(props) {
   const classes = useStyles();
+  const [state, setState] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem button key={'cart'}>
+          <ListItemIcon>
+            <ShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText primary={`Cart: (${props.cart.length})`} />
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem button key={'logout'}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary={'Logout'} />
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
     <div className={classes.root}>
@@ -43,13 +102,26 @@ function Header(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            id="nav-icon"
+            onClick={toggleDrawer('top', true)}
           >
             <MenuIcon />
           </IconButton>
+          <SwipeableDrawer
+            anchor={'top'}
+            open={state['top']}
+            onClose={toggleDrawer('top', false)}
+            onOpen={toggleDrawer('top', true)}
+          >
+            {list('top')}
+          </SwipeableDrawer>
           <Typography variant="h6" className={classes.title}>
             Dat Online Store
           </Typography>
-          <Button color="inherit">{`Cart (${props.cart.length})`}</Button>
+          <Button
+            color="inherit"
+            id="nav-cart"
+          >{`Cart (${props.cart.length})`}</Button>
         </Toolbar>
       </AppBar>
     </div>
