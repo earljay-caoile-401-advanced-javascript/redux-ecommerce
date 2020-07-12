@@ -20,6 +20,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -45,14 +48,9 @@ const useStyles = makeStyles((theme) => ({
  */
 function Header(props) {
   const classes = useStyles();
-  const [state, setState] = useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [openTop, setOpenTop] = useState(false);
 
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (open) => (event) => {
     if (
       event &&
       event.type === 'keydown' &&
@@ -61,17 +59,17 @@ function Header(props) {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setOpenTop(open);
   };
 
-  const list = (anchor) => (
+  const collapseList = () => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        [classes.fullList]: 'top',
       })}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
       <List>
         <ListItem button key={'cart'}>
@@ -103,17 +101,17 @@ function Header(props) {
             color="inherit"
             aria-label="menu"
             id="nav-icon"
-            onClick={toggleDrawer('top', true)}
+            onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
           <SwipeableDrawer
             anchor={'top'}
-            open={state['top']}
-            onClose={toggleDrawer('top', false)}
-            onOpen={toggleDrawer('top', true)}
+            open={openTop}
+            onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
           >
-            {list('top')}
+            {collapseList()}
           </SwipeableDrawer>
           <Typography variant="h6" className={classes.title}>
             Dat Online Store
