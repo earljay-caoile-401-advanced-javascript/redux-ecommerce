@@ -14,14 +14,22 @@ import {
   ListItemText,
   Divider,
   SwipeableDrawer,
+  Drawer,
 } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { makeStyles } from '@material-ui/core/styles';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-const useStyles = makeStyles((theme) => ({
+import CakeIcon from '@material-ui/icons/Cake';
+
+const drawerWidth = 300;
+
+const useCollapseNavStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -35,6 +43,54 @@ const useStyles = makeStyles((theme) => ({
   fullList: {
     width: 'auto',
   },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: drawerWidth,
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-start',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginRight: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: 0,
+  },
 }));
 
 /**
@@ -47,9 +103,10 @@ const useStyles = makeStyles((theme) => ({
  * )
  */
 function Header(props) {
-  const classes = useStyles();
+  const classes = useCollapseNavStyles();
+  const theme = useTheme();
   const [openTop, setOpenTop] = useState(false);
-
+  const [openRight, setOpenRight] = useState(false);
   const toggleDrawer = (open) => (event) => {
     if (
       event &&
@@ -62,7 +119,7 @@ function Header(props) {
     setOpenTop(open);
   };
 
-  const collapseList = () => (
+  const collapseNavList = () => (
     <div
       className={clsx(classes.list, {
         [classes.fullList]: 'top',
@@ -76,7 +133,7 @@ function Header(props) {
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
-          <ListItemText primary={`Cart: (${props.cart.length})`} />
+          <ListItemText primary={`Cart: (${props.cartCount})`} />
         </ListItem>
       </List>
       <Divider />
@@ -90,6 +147,32 @@ function Header(props) {
       </List>
     </div>
   );
+
+  const cartListToRender = [];
+
+  props.cart.forEach((value, key) => {
+    cartListToRender.push(
+      <ListItem key={key}>
+        <ListItemIcon>
+          <CakeIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary={value.displayName || value.name}
+          secondary={value.quantity}
+        />
+        <Button>
+          <DeleteForeverIcon
+            onClick={() =>
+              props.dispatch({
+                type: 'DELETE_FROM_CART',
+                payload: value,
+              })
+            }
+          />
+        </Button>
+      </ListItem>
+    );
+  });
 
   return (
     <div className={classes.root}>
@@ -111,7 +194,7 @@ function Header(props) {
             onClose={toggleDrawer(false)}
             onOpen={toggleDrawer(true)}
           >
-            {collapseList()}
+            {collapseNavList()}
           </SwipeableDrawer>
           <Typography variant="h6" className={classes.title}>
             Dat Online Store
@@ -119,9 +202,32 @@ function Header(props) {
           <Button
             color="inherit"
             id="nav-cart"
-          >{`Cart (${props.cart.length})`}</Button>
+            onClick={() => setOpenRight(true)}
+          >{`Cart (${props.cartCount})`}</Button>
         </Toolbar>
       </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="right"
+        open={openRight}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={() => setOpenRight(false)}>
+            {theme.direction === 'rtl' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+          <Typography variant="h6">Cart Items: {props.cartCount}</Typography>
+        </div>
+        <Divider />
+        <List>{cartListToRender}</List>
+      </Drawer>
     </div>
   );
 }
@@ -129,6 +235,7 @@ function Header(props) {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    cartCount: state.cartCount,
   };
 };
 

@@ -31,6 +31,7 @@
   ],
   "products": [
     {
+      "_id": "42c2d476-3349-415e-994b-edf534b8aa4c",
       "name": "TV",
       "description": "See all the things",
       "stock": 5,
@@ -38,6 +39,7 @@
       "category": "electronics"
     },
     {
+      "_id": "11a4bc6e-30c6-4e2b-b30b-bf285af0528d",
       "name": "Macbook",
       "description": "Do all the things",
       "stock": 7,
@@ -45,6 +47,7 @@
       "category": "electronics"
     },
     {
+      "_id": "82bfbccf-7a7e-46d4-a037-d7e33125e906",
       "name": "Carrot",
       "description": "Crunch all the things",
       "stock": 25,
@@ -52,6 +55,7 @@
       "category": "food"
     },
     {
+      "_id": "6a64f6a4-f233-4f32-955c-0d6d5b0786e1",
       "name": "Cake",
       "description": "Lie all the things",
       "stock": 10,
@@ -59,6 +63,7 @@
       "category": "food"
     },
     {
+      "_id": "204a3d62-fc02-4bdd-a3bd-feb6bd12dc2d",
       "name": "Divine Rapier",
       "description": "So powerful, it cannot have a single owner.",
       "stock": 1,
@@ -66,6 +71,7 @@
       "category": "mythical_weapons"
     },
     {
+      "_id": "5e87f12c22443353e4300820",
       "category": "mythical_weapons",
       "name": "mjolnir",
       "displayName": "Mjolnir",
@@ -74,6 +80,7 @@
       "price": 5600
     },
     {
+      "_id": "5e87f1a822443353e4300821",
       "category": "mythical_weapons",
       "name": "gungnir",
       "displayName": "Gungnir",
@@ -82,6 +89,7 @@
       "description": "Odin's spear. It supposedly doesn't miss..."
     },
     {
+      "_id": "5e8bc1f57dffb9a79147e82b",
       "category": "health_house_baby",
       "name": "adhesive_medical_strips",
       "displayName": "Adhesive Medical Strips",
@@ -90,6 +98,7 @@
       "price": 1
     },
     {
+      "_id": "5e8bc1fed6d43bae52531d4b",
       "category": "electronics",
       "name": "amd_ryzen_9_3950x",
       "displayName": "AMD Ryzen 9 3950X",
@@ -98,6 +107,7 @@
       "price": 750
     },
     {
+      "_id": "5e8bc267b2411d8502b69117",
       "category": "electronics",
       "name": "intel_core_i9_9900k",
       "displayName": "Intel Core i9-9900k",
@@ -106,6 +116,7 @@
       "price": 500
     },
     {
+      "_id": "5e8bc2765355fe493ac01ade",
       "category": "electronics",
       "name": "sennheiser_hd_650",
       "displayName": "Sennheiser HD 650",
