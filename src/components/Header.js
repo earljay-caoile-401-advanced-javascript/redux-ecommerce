@@ -49,7 +49,7 @@ function Header(props) {
           <Typography variant="h6" className={classes.title}>
             Dat Online Store
           </Typography>
-          <Button color="inherit">{`Cart (${props.cart})`}</Button>
+          <Button color="inherit">{`Cart (${props.cart.length})`}</Button>
         </Toolbar>
       </AppBar>
     </div>

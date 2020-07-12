@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 const sampleData = require('./data/db.json');
 
 const initState = {
-  cart: 0,
+  cart: [],
   categories: sampleData.categories,
   products: sampleData.products,
   currentCategory: sampleData.categories[0],
@@ -13,8 +13,7 @@ const reducer = (state = initState, action) => {
 
   switch (action.type) {
     case 'ADD_TO_CART':
-      newState.addedItem = action.payload;
-      newState.cart++;
+      newState.cart.push(action.payload);
       action.payload.stock--;
       break;
     case 'CHANGE_CATEGORY':
@@ -28,3 +27,4 @@ const reducer = (state = initState, action) => {
 };
 
 export default createStore(reducer);
+export { reducer };
