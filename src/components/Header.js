@@ -75,22 +75,6 @@ const useCollapseNavStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-start',
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginRight: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginRight: 0,
-  },
 }));
 
 /**
@@ -160,15 +144,15 @@ function Header(props) {
           primary={value.displayName || value.name}
           secondary={value.quantity}
         />
-        <Button>
-          <DeleteForeverIcon
-            onClick={() =>
-              props.dispatch({
-                type: 'DELETE_FROM_CART',
-                payload: value,
-              })
-            }
-          />
+        <Button
+          onClick={() =>
+            props.dispatch({
+              type: 'DELETE_FROM_CART',
+              payload: value,
+            })
+          }
+        >
+          <DeleteForeverIcon />
         </Button>
       </ListItem>
     );
@@ -176,7 +160,13 @@ function Header(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" id="main-header">
+      <AppBar
+        position="fixed"
+        id="main-header"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: openRight,
+        })}
+      >
         <Toolbar>
           <IconButton
             edge="start"
@@ -223,7 +213,7 @@ function Header(props) {
               <ChevronRightIcon />
             )}
           </IconButton>
-          <Typography variant="h6">Cart Items: {props.cartCount}</Typography>
+          <Typography variant="h6">Cart Items</Typography>
         </div>
         <Divider />
         <List>{cartListToRender}</List>

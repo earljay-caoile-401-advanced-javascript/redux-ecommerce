@@ -15,7 +15,7 @@ describe('reducer', () => {
   it('can add to cart', () => {
     const newState = reducer(
       {
-        cart: [],
+        cart: new Map(),
       },
       {
         type: 'ADD_TO_CART',
@@ -23,13 +23,13 @@ describe('reducer', () => {
       }
     );
 
-    expect(newState.cart).toHaveLength(1);
+    expect(newState.cart.size).toBe(1);
 
     const newerState = reducer(newState, {
       type: 'ADD_TO_CART',
       payload: sampleData.products[1],
     });
 
-    expect(newerState.cart).toHaveLength(2);
+    expect(newerState.cart.size).toBe(2);
   });
 });

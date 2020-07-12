@@ -13,7 +13,7 @@ describe('header component', () => {
     );
     expect(component).toBeDefined();
 
-    const h6Tag = component.find('h6');
+    const h6Tag = component.find('h6').at(0);
     expect(h6Tag).toBeDefined();
     expect(h6Tag.text()).toBe('Dat Online Store');
   });
