@@ -13,8 +13,10 @@ const reducer = (state = initState, action) => {
 
   switch (action.type) {
     case 'ADD_TO_CART':
-      newState.cart.push(action.payload);
-      action.payload.stock--;
+      if (action.payload.stock) {
+        action.payload.stock--;
+        newState.cart.push(action.payload);
+      }
       break;
     case 'CHANGE_CATEGORY':
       newState.currentCategory = action.payload;

@@ -76,7 +76,7 @@ function Header(props) {
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
-          <ListItemText primary={`Cart: (${props.cart.length})`} />
+          <ListItemText primary={`Cart: (${props.cartCount})`} />
         </ListItem>
       </List>
       <Divider />
@@ -119,7 +119,7 @@ function Header(props) {
           <Button
             color="inherit"
             id="nav-cart"
-          >{`Cart (${props.cart.length})`}</Button>
+          >{`Cart (${props.cartCount})`}</Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -129,6 +129,7 @@ function Header(props) {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    cartCount: state.cart.length,
   };
 };
 

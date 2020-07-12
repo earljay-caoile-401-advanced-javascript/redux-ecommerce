@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.products,
     currentCategory: state.currentCategory,
-    addedItem: state.addedItem,
+    cartCount: state.cart.length,
   };
 };
 
