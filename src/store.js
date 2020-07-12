@@ -16,7 +16,6 @@ const reducer = (state = initState, action) => {
       if (action.payload.stock) {
         action.payload.stock--;
         newState.cart = [...newState.cart, action.payload];
-        // newState.cart.push(action.payload);
       }
       break;
     case 'CHANGE_CATEGORY':
