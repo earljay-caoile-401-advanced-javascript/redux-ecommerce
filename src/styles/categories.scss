@@ -1,0 +1,15 @@
+@import 'variables';
+
+#active-category {
+  margin: $spacing * 2.5 auto;
+
+  * {
+    text-align: center;
+    margin: $spacing / 4;
+  }
+}
+
+.cat-select {
+  padding: $spacing / 2;
+  min-width: 200px;
+}

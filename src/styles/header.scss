@@ -1,0 +1,19 @@
+@import 'variables';
+
+#main-header {
+  font-family: 'Times New Roman', Times, serif;
+  min-height: 5vh;
+  background: $darkBlue;
+}
+
+#nav-icon {
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
+#nav-cart {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

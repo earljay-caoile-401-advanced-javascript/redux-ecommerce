@@ -1,0 +1,145 @@
+@import 'variables';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 350px; // min-width for mobile devices
+}
+
+.error {
+  color: red;
+  animation: shake 0.5s;
+
+  @keyframes shake {
+    0% {
+      transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+      transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+      transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+      transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+      transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+      transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+      transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+      transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+      transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+      transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+      transform: translate(1px, -2px) rotate(-1deg);
+    }
+  }
+}
+
+#main-header,
+#main-content,
+#main-footer {
+  box-sizing: border-box;
+}
+
+#main-content,
+#main-footer {
+  justify-content: center;
+  align-items: center;
+}
+
+#main-footer {
+  min-height: 7.5vh;
+  display: flex;
+}
+
+#main-content {
+  min-height: 87.5vh;
+  padding: $spacing * 2.5;
+  box-sizing: border-box;
+  margin: 5vh 5% auto;
+
+  @media (min-width: 1200px) {
+    margin: 5vh 7.5% auto;
+  }
+
+  @media (min-width: 1920px) {
+    margin: 5vh 10% auto;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+    margin-top: 5vh;
+    padding: $spacing * 2.5 $spacing;
+  }
+
+  .cont-child {
+    margin: 2em auto;
+  }
+
+  @media (max-height: 1080px) {
+    margin-top: $spacing * 8;
+  }
+}
+
+.fade-in {
+  @include setCompatibleProp('animation', fadein ease 0.5s);
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.task-count-settings {
+  display: flex;
+  flex-direction: row;
+
+  h3 {
+    width: 25%;
+    color: $darkBlue;
+    align-self: center;
+
+    @media (max-width: 950px) {
+      display: none;
+    }
+  }
+
+  #settings {
+    width: 75%;
+
+    @media (max-width: 950px) {
+      width: 100%;
+    }
+  }
+}
