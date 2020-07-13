@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
+import SimpleCart from './SimpleCart';
 import '../styles/header.scss';
 import {
   AppBar,
@@ -14,23 +15,11 @@ import {
   ListItemText,
   Divider,
   SwipeableDrawer,
-  Drawer,
-  Grid,
 } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import CakeIcon from '@material-ui/icons/Cake';
-import GavelIcon from '@material-ui/icons/Gavel';
-import DevicesIcon from '@material-ui/icons/Devices';
-import HealingIcon from '@material-ui/icons/Healing';
-import HelpIcon from '@material-ui/icons/Help';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const drawerWidth = 350;
 
@@ -136,69 +125,6 @@ function Header(props) {
     </div>
   );
 
-  const cartListToRender = [];
-
-  props.cart.forEach((value, key) => {
-    let itemIcon;
-    switch (value.category) {
-      case 'mythical_weapons':
-        itemIcon = <GavelIcon />;
-        break;
-      case 'health_house_baby':
-        itemIcon = <HealingIcon />;
-        break;
-      case 'electronics':
-        itemIcon = <DevicesIcon />;
-        break;
-      case 'food':
-        itemIcon = <CakeIcon />;
-        break;
-      default:
-        itemIcon = <HelpIcon />;
-        break;
-    }
-
-    cartListToRender.push(
-      <ListItem key={key}>
-        <ListItemIcon>{itemIcon}</ListItemIcon>
-        <ListItemText
-          primary={value.displayName || value.name}
-          secondary={value.quantity}
-        />
-        <Button
-          onClick={() => {
-            props.dispatch({
-              type: 'INCREMENT_ITEM',
-              payload: value,
-            });
-          }}
-        >
-          <ArrowUpwardIcon />
-        </Button>
-        <Button
-          onClick={() => {
-            props.dispatch({
-              type: 'DECREMENT_ITEM',
-              payload: value,
-            });
-          }}
-        >
-          <ArrowDownwardIcon />
-        </Button>
-        <Button
-          onClick={() => {
-            props.dispatch({
-              type: 'DELETE_FROM_CART',
-              payload: value,
-            });
-          }}
-        >
-          <DeleteForeverIcon />
-        </Button>
-      </ListItem>
-    );
-  });
-
   return (
     <AppBar
       position="fixed"
@@ -235,29 +161,12 @@ function Header(props) {
           onClick={() => setOpenRight(!openRight)}
         >{`Cart (${props.cartCount})`}</Button>
       </Toolbar>
-      <Drawer
-        id="cart-collapse"
-        className={classes.drawer}
-        variant="persistent"
-        anchor="right"
-        open={openRight}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={() => setOpenRight(false)}>
-            {theme.direction === 'rtl' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-          <Typography variant="h6">Cart Items</Typography>
-        </div>
-        <Divider />
-        <List>{cartListToRender}</List>
-      </Drawer>
+      <SimpleCart
+        theme={theme}
+        openRight={openRight}
+        setOpenRight={setOpenRight}
+        classes={classes}
+      />
     </AppBar>
   );
 }
