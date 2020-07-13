@@ -15,6 +15,7 @@ import {
   Divider,
   SwipeableDrawer,
   Drawer,
+  Grid,
 } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -28,8 +29,10 @@ import GavelIcon from '@material-ui/icons/Gavel';
 import DevicesIcon from '@material-ui/icons/Devices';
 import HealingIcon from '@material-ui/icons/Healing';
 import HelpIcon from '@material-ui/icons/Help';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
-const drawerWidth = 300;
+const drawerWidth = 350;
 
 const useCollapseNavStyles = makeStyles((theme) => ({
   menuButton: {
@@ -163,12 +166,32 @@ function Header(props) {
           secondary={value.quantity}
         />
         <Button
-          onClick={() =>
+          onClick={() => {
+            props.dispatch({
+              type: 'INCREMENT_ITEM',
+              payload: value,
+            });
+          }}
+        >
+          <ArrowUpwardIcon />
+        </Button>
+        <Button
+          onClick={() => {
+            props.dispatch({
+              type: 'DECREMENT_ITEM',
+              payload: value,
+            });
+          }}
+        >
+          <ArrowDownwardIcon />
+        </Button>
+        <Button
+          onClick={() => {
             props.dispatch({
               type: 'DELETE_FROM_CART',
               payload: value,
-            })
-          }
+            });
+          }}
         >
           <DeleteForeverIcon />
         </Button>
