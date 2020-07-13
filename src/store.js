@@ -16,15 +16,20 @@ const reducer = (state = initState, action) => {
     case 'ADD_TO_CART':
       if (action.payload.stock) {
         action.payload.stock--;
-        if (newState.cart.has(action.payload._id)) {
-          const prevCartObj = newState.cart.get(action.payload._id);
-          prevCartObj.quantity++;
-        } else {
-          newState.cart.set(action.payload._id, {
-            ...action.payload,
-            quantity: 1,
-          });
-        }
+        // if (newState.cart.has(action.payload._id)) {
+        //   const prevCartObj = newState.cart.get(action.payload._id);
+        //   prevCartObj.quantity++;
+        // } else {
+        //   newState.cart.set(action.payload._id, {
+        //     ...action.payload,
+        //     quantity: 1,
+        //   });
+        // }
+        const prevCartObj = newState.cart.get(action.payload._id);
+        newState.cart.set(action.payload._id, {
+          ...(prevCartObj || action.payload),
+          quantity: (prevCartObj ? prevCartObj.quantity : 0) + 1,
+        });
       }
       newState.cartCount++;
       break;

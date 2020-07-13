@@ -28,16 +28,13 @@ import CakeIcon from '@material-ui/icons/Cake';
 const drawerWidth = 300;
 
 const useCollapseNavStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
   },
-  list: {
+  topList: {
     width: 250,
   },
   fullList: {
@@ -105,7 +102,7 @@ function Header(props) {
 
   const collapseNavList = () => (
     <div
-      className={clsx(classes.list, {
+      className={clsx(classes.topList, {
         [classes.fullList]: 'top',
       })}
       role="presentation"
@@ -159,44 +156,43 @@ function Header(props) {
   });
 
   return (
-    <div className={classes.root}>
-      <AppBar
-        position="fixed"
-        id="main-header"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: openRight,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            id="nav-icon"
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <SwipeableDrawer
-            anchor={'top'}
-            open={openTop}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-          >
-            {collapseNavList()}
-          </SwipeableDrawer>
-          <Typography variant="h6" className={classes.title}>
-            Dat Online Store
-          </Typography>
-          <Button
-            color="inherit"
-            id="nav-cart"
-            onClick={() => setOpenRight(true)}
-          >{`Cart (${props.cartCount})`}</Button>
-        </Toolbar>
-      </AppBar>
+    <AppBar
+      position="fixed"
+      id="main-header"
+      className={clsx(classes.appBar, {
+        [classes.appBarShift]: openRight,
+      })}
+    >
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="menu"
+          id="nav-icon"
+          onClick={toggleDrawer(true)}
+        >
+          <MenuIcon />
+        </IconButton>
+        <SwipeableDrawer
+          anchor={'top'}
+          open={openTop}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+        >
+          {collapseNavList()}
+        </SwipeableDrawer>
+        <Typography variant="h6" className={classes.title}>
+          Dat Online Store
+        </Typography>
+        <Button
+          color="inherit"
+          id="nav-cart"
+          onClick={() => setOpenRight(!openRight)}
+        >{`Cart (${props.cartCount})`}</Button>
+      </Toolbar>
       <Drawer
+        id="cart-collapse"
         className={classes.drawer}
         variant="persistent"
         anchor="right"
@@ -218,7 +214,7 @@ function Header(props) {
         <Divider />
         <List>{cartListToRender}</List>
       </Drawer>
-    </div>
+    </AppBar>
   );
 }
 
