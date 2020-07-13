@@ -24,6 +24,10 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import CakeIcon from '@material-ui/icons/Cake';
+import GavelIcon from '@material-ui/icons/Gavel';
+import DevicesIcon from '@material-ui/icons/Devices';
+import HealingIcon from '@material-ui/icons/Healing';
+import HelpIcon from '@material-ui/icons/Help';
 
 const drawerWidth = 300;
 
@@ -110,7 +114,7 @@ function Header(props) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button key={'cart'}>
+        <ListItem button key={'cart'} onClick={() => setOpenRight(true)}>
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
@@ -132,11 +136,28 @@ function Header(props) {
   const cartListToRender = [];
 
   props.cart.forEach((value, key) => {
+    let itemIcon;
+    switch (value.category) {
+      case 'mythical_weapons':
+        itemIcon = <GavelIcon />;
+        break;
+      case 'health_house_baby':
+        itemIcon = <HealingIcon />;
+        break;
+      case 'electronics':
+        itemIcon = <DevicesIcon />;
+        break;
+      case 'food':
+        itemIcon = <CakeIcon />;
+        break;
+      default:
+        itemIcon = <HelpIcon />;
+        break;
+    }
+
     cartListToRender.push(
       <ListItem key={key}>
-        <ListItemIcon>
-          <CakeIcon />
-        </ListItemIcon>
+        <ListItemIcon>{itemIcon}</ListItemIcon>
         <ListItemText
           primary={value.displayName || value.name}
           secondary={value.quantity}
