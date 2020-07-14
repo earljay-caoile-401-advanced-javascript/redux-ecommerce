@@ -11,6 +11,7 @@ import {
   Grid,
 } from '@material-ui/core';
 import { addToCart } from '../store/cartStore';
+import { decrementFromAdd } from '../store/productStore';
 
 /**
  * Component that renders the list of products as cards
@@ -64,6 +65,7 @@ function Products(props) {
                   disabled={!product.stock}
                   onClick={() => {
                     props.addToCart(product);
+                    props.decrementFromAdd(product);
                   }}
                 >
                   Add to Cart
@@ -97,6 +99,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { addToCart };
+const mapDispatchToProps = { addToCart, decrementFromAdd };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
