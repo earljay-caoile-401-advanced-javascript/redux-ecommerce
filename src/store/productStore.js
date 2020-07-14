@@ -43,7 +43,7 @@ const productReducer = (state = initState, action) => {
       break;
     case 'RESTOCK_AFTER_DELETE':
       prevProd = newState.products.get(action.payload._id);
-      productMap.set(action.payload._id, {
+      newState.products.set(action.payload._id, {
         ...prevProd,
         stock: prevProd.stock + action.payload.quantity,
       });

@@ -115,6 +115,15 @@ describe('reducer', () => {
     );
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(5);
+    expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
+      sampleData.products[0].stock - 3
+    );
+    expect(newState.products.get(sampleData.products[1]._id).stock).toBe(
+      sampleData.products[1].stock - 1
+    );
+    expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
+      sampleData.products[2].stock - 1
+    );
 
     newState = cartHelper(
       newState,
@@ -129,18 +138,18 @@ describe('reducer', () => {
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(6);
 
+    let itemToDelete = { ...newState.cart.get(sampleData.products[0]._id) };
     newState = cartHelper(
       newState,
       newState.cart.get(sampleData.products[0]._id),
       'DELETE_FROM_CART'
     );
-    newState = productHelper(
-      newState,
-      newState.products.get(sampleData.products[0]._id),
-      'RESTOCK_AFTER_DELETE'
-    );
+    newState = productHelper(newState, itemToDelete, 'RESTOCK_AFTER_DELETE');
     expect(newState.cart.size).toBe(2);
     expect(newState.cartCount).toBe(3);
+    expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
+      sampleData.products[0].stock
+    );
 
     newState = cartHelper(
       newState,
@@ -168,17 +177,17 @@ describe('reducer', () => {
     expect(newState.cart.size).toBe(1);
     expect(newState.cartCount).toBe(1);
 
+    itemToDelete = { ...newState.cart.get(sampleData.products[2]._id) };
     newState = cartHelper(
       newState,
       newState.cart.get(sampleData.products[2]._id),
       'DELETE_FROM_CART'
     );
-    newState = productHelper(
-      newState,
-      newState.products.get(sampleData.products[2]._id),
-      'RESTOCK_AFTER_DELETE'
-    );
+    newState = productHelper(newState, itemToDelete, 'RESTOCK_AFTER_DELETE');
     expect(newState.cart.size).toBe(0);
     expect(newState.cartCount).toBe(0);
+    expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
+      sampleData.products[2].stock
+    );
   });
 });
