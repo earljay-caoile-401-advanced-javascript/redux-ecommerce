@@ -26,6 +26,11 @@ import {
   incrementItem,
   decrementItem,
 } from '../store/cartStore';
+import {
+  decrementFromUpArrow,
+  incrementFromDownArrow,
+  restockAfterDelete,
+} from '../store/productStore';
 
 function SimpleCart(props) {
   const cartListToRender = [];
@@ -62,6 +67,7 @@ function SimpleCart(props) {
           <Button
             onClick={() => {
               props.incrementItem(value);
+              props.decrementFromUpArrow(value);
             }}
           >
             <ArrowUpwardIcon />
@@ -69,6 +75,7 @@ function SimpleCart(props) {
           <Button
             onClick={() => {
               props.decrementItem(value);
+              props.incrementFromDownArrow(value);
             }}
           >
             <ArrowDownwardIcon />
@@ -76,6 +83,7 @@ function SimpleCart(props) {
           <Button
             onClick={() => {
               props.removeFromCart(value);
+              props.restockAfterDelete(value);
             }}
           >
             <DeleteForeverIcon />
@@ -123,6 +131,9 @@ const mapDispatchToProps = {
   removeFromCart,
   incrementItem,
   decrementItem,
+  decrementFromUpArrow,
+  incrementFromDownArrow,
+  restockAfterDelete,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

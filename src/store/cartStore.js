@@ -8,21 +8,13 @@ const cartReducer = (state = initState, action) => {
 
   switch (action.type) {
     case 'ADD_TO_CART':
+    case 'INCREMENT_ITEM':
       if (action.payload.stock) {
-        action.payload.stock--;
+        // action.payload.stock--;
         const prevCartObj = newState.cart.get(action.payload._id);
         newState.cart.set(action.payload._id, {
           ...(prevCartObj || action.payload),
           quantity: (prevCartObj ? prevCartObj.quantity : 0) + 1,
-        });
-        newState.cartCount++;
-      }
-      break;
-    case 'INCREMENT_ITEM':
-      if (action.payload.stock) {
-        newState.cart.set(action.payload._id, {
-          ...action.payload,
-          quantity: action.payload.quantity + 1,
           stock: action.payload.stock - 1,
         });
         newState.cartCount++;
@@ -41,8 +33,8 @@ const cartReducer = (state = initState, action) => {
       newState.cartCount--;
       break;
     case 'DELETE_FROM_CART':
-      newState.cart.delete(action.payload._id);
       newState.cartCount -= action.payload.quantity;
+      newState.cart.delete(action.payload._id);
       break;
     default:
       break;
