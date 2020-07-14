@@ -24,7 +24,6 @@ import { decrementFromAdd } from '../store/productStore';
  * )
  */
 function Products(props) {
-  // console.log('props in products?', props);
   const prodsToRender = [];
   const propProds = props.products;
 

@@ -50,27 +50,30 @@
     },
     {
       "_id": "82bfbccf-7a7e-46d4-a037-d7e33125e906",
-      "name": "Carrot",
+      "category": "food",
+      "name": "carrot",
+      "displayName": "Carrot",
       "description": "Crunch all the things",
       "stock": 25,
-      "price": 0.3,
-      "category": "food"
+      "price": 0.3
     },
     {
       "_id": "6a64f6a4-f233-4f32-955c-0d6d5b0786e1",
-      "name": "Cake",
+      "category": "food",
+      "name": "cake",
+      "displayName": "Cake",
       "description": "Lie all the things",
       "stock": 10,
-      "price": 5,
-      "category": "food"
+      "price": 5
     },
     {
       "_id": "204a3d62-fc02-4bdd-a3bd-feb6bd12dc2d",
-      "name": "Divine Rapier",
+      "category": "mythical_weapons",
+      "name": "divine_rapier",
+      "displayName": "Divine Rapier",
       "description": "So powerful, it cannot have a single owner.",
       "stock": 1,
-      "price": 6000,
-      "category": "mythical_weapons"
+      "price": 6000
     },
     {
       "_id": "5e87f12c22443353e4300820",
