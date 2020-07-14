@@ -32,7 +32,8 @@
   "products": [
     {
       "_id": "42c2d476-3349-415e-994b-edf534b8aa4c",
-      "name": "TV",
+      "name": "tv",
+      "displayName": "TV",
       "description": "See all the things",
       "stock": 5,
       "price": 400,
@@ -40,7 +41,8 @@
     },
     {
       "_id": "11a4bc6e-30c6-4e2b-b30b-bf285af0528d",
-      "name": "Macbook",
+      "name": "macbook",
+      "displayName": "Macbook",
       "description": "Do all the things",
       "stock": 7,
       "price": 1200,

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Select, MenuItem } from '@material-ui/core';
 import '../styles/categories.scss';
+import { changeCategory } from '../store/categoryStore';
 
 /**
  * Component that renders the list of categories as a dropdown with a title
@@ -25,10 +26,7 @@ function Categories(props) {
           value={category.name}
           key={i}
           onClick={() => {
-            props.dispatch({
-              type: 'CHANGE_CATEGORY',
-              payload: category,
-            });
+            props.changeCategory(category);
           }}
         >
           {category.displayName || category.name}
@@ -40,7 +38,10 @@ function Categories(props) {
   return (
     <div id="categories" className="cont-child">
       <h2>Browse our Categories</h2>
-      <Select value={props.currentCategory.name} className="cat-select">
+      <Select
+        value={props.currentCategory ? props.currentCategory.name : ''}
+        className="cat-select"
+      >
         {catsToRender}
       </Select>
     </div>
@@ -49,9 +50,11 @@ function Categories(props) {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories,
-    currentCategory: state.currentCategory,
+    categories: state.categoryStore.categories,
+    currentCategory: state.categoryStore.currentCategory,
   };
 };
 
-export default connect(mapStateToProps)(Categories);
+const mapDispatchToProps = { changeCategory };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

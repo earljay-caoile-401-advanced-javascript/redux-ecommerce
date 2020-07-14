@@ -21,69 +21,69 @@ import HealingIcon from '@material-ui/icons/Healing';
 import HelpIcon from '@material-ui/icons/Help';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import {
+  removeFromCart,
+  incrementItem,
+  decrementItem,
+} from '../store/cartStore';
+
 function SimpleCart(props) {
   const cartListToRender = [];
+  const propCart = props.cart;
 
-  props.cart.forEach((value, key) => {
-    let itemIcon;
-    switch (value.category) {
-      case 'mythical_weapons':
-        itemIcon = <GavelIcon />;
-        break;
-      case 'health_house_baby':
-        itemIcon = <HealingIcon />;
-        break;
-      case 'electronics':
-        itemIcon = <DevicesIcon />;
-        break;
-      case 'food':
-        itemIcon = <CakeIcon />;
-        break;
-      default:
-        itemIcon = <HelpIcon />;
-        break;
-    }
+  if (propCart) {
+    propCart.forEach((value, key) => {
+      let itemIcon;
+      switch (value.category) {
+        case 'mythical_weapons':
+          itemIcon = <GavelIcon />;
+          break;
+        case 'health_house_baby':
+          itemIcon = <HealingIcon />;
+          break;
+        case 'electronics':
+          itemIcon = <DevicesIcon />;
+          break;
+        case 'food':
+          itemIcon = <CakeIcon />;
+          break;
+        default:
+          itemIcon = <HelpIcon />;
+          break;
+      }
 
-    cartListToRender.push(
-      <ListItem key={key}>
-        <ListItemIcon>{itemIcon}</ListItemIcon>
-        <ListItemText
-          primary={value.displayName || value.name}
-          secondary={value.quantity}
-        />
-        <Button
-          onClick={() => {
-            props.dispatch({
-              type: 'INCREMENT_ITEM',
-              payload: value,
-            });
-          }}
-        >
-          <ArrowUpwardIcon />
-        </Button>
-        <Button
-          onClick={() => {
-            props.dispatch({
-              type: 'DECREMENT_ITEM',
-              payload: value,
-            });
-          }}
-        >
-          <ArrowDownwardIcon />
-        </Button>
-        <Button
-          onClick={() => {
-            props.dispatch({
-              type: 'DELETE_FROM_CART',
-              payload: value,
-            });
-          }}
-        >
-          <DeleteForeverIcon />
-        </Button>
-      </ListItem>
-    );
-  });
+      cartListToRender.push(
+        <ListItem key={key}>
+          <ListItemIcon>{itemIcon}</ListItemIcon>
+          <ListItemText
+            primary={value.displayName || value.name}
+            secondary={value.quantity}
+          />
+          <Button
+            onClick={() => {
+              props.incrementItem(value);
+            }}
+          >
+            <ArrowUpwardIcon />
+          </Button>
+          <Button
+            onClick={() => {
+              props.decrementItem(value);
+            }}
+          >
+            <ArrowDownwardIcon />
+          </Button>
+          <Button
+            onClick={() => {
+              props.removeFromCart(value);
+            }}
+          >
+            <DeleteForeverIcon />
+          </Button>
+        </ListItem>
+      );
+    });
+  }
 
   return (
     <Drawer
@@ -114,9 +114,15 @@ function SimpleCart(props) {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
-    cartCount: state.cartCount,
+    cart: state.cartStore.cart,
+    cartCount: state.cartStore.cartCount,
   };
 };
 
-export default connect(mapStateToProps)(SimpleCart);
+const mapDispatchToProps = {
+  removeFromCart,
+  incrementItem,
+  decrementItem,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);
