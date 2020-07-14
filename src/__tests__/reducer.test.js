@@ -1,10 +1,13 @@
-import { reducer } from '../store';
+'use strict';
+
+import categoryReducer from '../store/categoryStore';
+import cartReducer from '../store/cartStore';
 const sampleData = require('../data/db.json');
 
 describe('reducer', () => {
   it('can change category', () => {
     sampleData.categories.forEach((category) => {
-      const newState = reducer(
+      const newState = categoryReducer(
         {},
         { type: 'CHANGE_CATEGORY', payload: category }
       );
@@ -13,7 +16,7 @@ describe('reducer', () => {
   });
 
   it('can add to cart', () => {
-    const newState = reducer(
+    let newState = cartReducer(
       {
         cart: new Map(),
       },
@@ -25,11 +28,11 @@ describe('reducer', () => {
 
     expect(newState.cart.size).toBe(1);
 
-    const newerState = reducer(newState, {
+    newState = cartReducer(newState, {
       type: 'ADD_TO_CART',
       payload: sampleData.products[1],
     });
 
-    expect(newerState.cart.size).toBe(2);
+    expect(newState.cart.size).toBe(2);
   });
 });
