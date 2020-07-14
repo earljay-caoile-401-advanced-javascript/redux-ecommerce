@@ -3,6 +3,11 @@ const initState = {
   cartCount: 0,
 };
 
+/**
+ * reducer that handles updating cart state
+ * @param {Object} state - initial or current state
+ * @param {Object} action - object containing information to update state
+ */
 const cartReducer = (state = initState, action) => {
   const newState = { ...state };
 
@@ -10,7 +15,6 @@ const cartReducer = (state = initState, action) => {
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
       if (action.payload.stock) {
-        // action.payload.stock--;
         const prevCartObj = newState.cart.get(action.payload._id);
         newState.cart.set(action.payload._id, {
           ...(prevCartObj || action.payload),

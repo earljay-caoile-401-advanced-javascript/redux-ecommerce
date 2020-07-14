@@ -7,7 +7,8 @@ const initState = {
 /**
  * reducer that holds the collection of products and directly updates
  * their stock
- * @param {Object} state - initial state of the product reducer
+ * @param {Object} state - initial or current state
+ * @param {Object} action - object containing information to update state
  */
 const productReducer = (state = initState, action) => {
   const newState = { ...state };
