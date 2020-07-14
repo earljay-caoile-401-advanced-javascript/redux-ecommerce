@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Button,
+  Grid,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -36,6 +37,7 @@ function SimpleCart(props) {
   const cartListToRender = [];
   const propCart = props.cart;
 
+  let totalCost = 0;
   if (propCart) {
     propCart.forEach((value, key) => {
       let itemIcon;
@@ -56,6 +58,8 @@ function SimpleCart(props) {
           itemIcon = <HelpIcon />;
           break;
       }
+
+      totalCost += value.price * value.quantity;
 
       cartListToRender.push(
         <ListItem key={key}>
@@ -81,6 +85,7 @@ function SimpleCart(props) {
             <ArrowDownwardIcon />
           </Button>
           <Button
+            color="secondary"
             onClick={() => {
               props.removeFromCart(value);
               props.restockAfterDelete(value);
@@ -112,7 +117,17 @@ function SimpleCart(props) {
             <ChevronRightIcon />
           )}
         </IconButton>
-        <Typography variant="h6">Cart Items</Typography>
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Typography variant="h6">Cart Items</Typography>
+          <Typography variant="subtitle1">
+            {cartListToRender.length ? `Subtotal: ${totalCost} G` : null}
+          </Typography>
+        </Grid>
       </div>
       <Divider />
       <List>{cartListToRender}</List>

@@ -2,7 +2,7 @@ const sampleData = require('../data/db.json');
 const productMap = new Map();
 
 /**
- * Yes, I'm a madman and put the products into a map instead of using an array.
+ * Yes, I'm a madman and I put the products into a map instead of using an array.
  * I couldn't resist O(1) lookup
  */
 sampleData.products.forEach((product) => {
