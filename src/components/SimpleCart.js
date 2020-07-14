@@ -16,12 +16,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CakeIcon from '@material-ui/icons/Cake';
-import GavelIcon from '@material-ui/icons/Gavel';
 import DevicesIcon from '@material-ui/icons/Devices';
 import HealingIcon from '@material-ui/icons/Healing';
 import HelpIcon from '@material-ui/icons/Help';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ColorizeIcon from '@material-ui/icons/Colorize';
 import {
   removeFromCart,
   incrementItem,
@@ -43,7 +43,7 @@ function SimpleCart(props) {
       let itemIcon;
       switch (value.category) {
         case 'mythical_weapons':
-          itemIcon = <GavelIcon />;
+          itemIcon = <ColorizeIcon />;
           break;
         case 'health_house_baby':
           itemIcon = <HealingIcon />;
@@ -124,7 +124,7 @@ function SimpleCart(props) {
           alignItems="center"
         >
           <Typography variant="h6">Cart Items</Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle2">
             {cartListToRender.length ? `Subtotal: ${totalCost} G` : null}
           </Typography>
         </Grid>
