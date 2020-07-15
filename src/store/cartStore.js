@@ -4,9 +4,9 @@ const initState = {
 };
 
 /**
- * reducer that handles updating cart state
+ * Reducer that handles updating cart state. Part of the mega reducer formed in the index file
  * @param {Object} state - initial or current state
- * @param {Object} action - object containing information to update state
+ * @param {Object} action - object containing information to update cart state
  */
 const cartReducer = (state = initState, action) => {
   const newState = { ...state };

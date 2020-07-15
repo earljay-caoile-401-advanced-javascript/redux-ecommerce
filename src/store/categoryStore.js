@@ -5,6 +5,11 @@ const initState = {
   currentCategory: sampleData.categories[0],
 };
 
+/**
+ * Reducer that handles updating category state. Part of the mega reducer formed in the index file
+ * @param {Object} state - initial or current state
+ * @param {Object} action - object containing information to update category state
+ */
 const categoryReducer = (state = initState, action) => {
   const newState = { ...state };
 

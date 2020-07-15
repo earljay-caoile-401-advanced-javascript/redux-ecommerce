@@ -70,24 +70,12 @@ describe('reducer', () => {
         payload: sampleData.products[0],
       }
     );
-    newState = productHelper(
-      newState,
-      sampleData.products[0],
-      'DESTOCK_FROM_ADD'
-    );
+    newState = productHelper(newState, sampleData.products[0], 'ADD_TO_CART');
 
     newState = cartHelper(newState, sampleData.products[1], 'ADD_TO_CART');
-    newState = productHelper(
-      newState,
-      sampleData.products[1],
-      'DESTOCK_FROM_ADD'
-    );
+    newState = productHelper(newState, sampleData.products[1], 'ADD_TO_CART');
     newState = cartHelper(newState, sampleData.products[2], 'ADD_TO_CART');
-    newState = productHelper(
-      newState,
-      sampleData.products[2],
-      'DESTOCK_FROM_ADD'
-    );
+    newState = productHelper(newState, sampleData.products[2], 'ADD_TO_CART');
     expect(newState.cart.size).toBe(3);
 
     newState = cartHelper(
@@ -98,7 +86,7 @@ describe('reducer', () => {
     newState = productHelper(
       newState,
       newState.products.get(sampleData.products[0]._id),
-      'DESTOCK_FROM_UP_ARROW'
+      'INCREMENT_ITEM'
     );
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(4);
@@ -111,7 +99,7 @@ describe('reducer', () => {
     newState = productHelper(
       newState,
       newState.products.get(sampleData.products[0]._id),
-      'DESTOCK_FROM_UP_ARROW'
+      'INCREMENT_ITEM'
     );
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(5);
@@ -133,7 +121,7 @@ describe('reducer', () => {
     newState = productHelper(
       newState,
       newState.products.get(sampleData.products[1]._id),
-      'DESTOCK_FROM_UP_ARROW'
+      'INCREMENT_ITEM'
     );
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(6);
@@ -144,7 +132,7 @@ describe('reducer', () => {
       newState.cart.get(sampleData.products[0]._id),
       'DELETE_FROM_CART'
     );
-    newState = productHelper(newState, itemToDelete, 'RESTOCK_AFTER_DELETE');
+    newState = productHelper(newState, itemToDelete, 'DELETE_FROM_CART');
     expect(newState.cart.size).toBe(2);
     expect(newState.cartCount).toBe(3);
     expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
@@ -159,7 +147,7 @@ describe('reducer', () => {
     newState = productHelper(
       newState,
       newState.products.get(sampleData.products[1]._id),
-      'RESTOCK_FROM_DOWN_ARROW'
+      'DECREMENT_ITEM'
     );
     expect(newState.cart.size).toBe(2);
     expect(newState.cartCount).toBe(2);
@@ -172,7 +160,7 @@ describe('reducer', () => {
     newState = productHelper(
       newState,
       newState.products.get(sampleData.products[1]._id),
-      'RESTOCK_FROM_DOWN_ARROW'
+      'DECREMENT_ITEM'
     );
     expect(newState.cart.size).toBe(1);
     expect(newState.cartCount).toBe(1);
@@ -183,7 +171,7 @@ describe('reducer', () => {
       newState.cart.get(sampleData.products[2]._id),
       'DELETE_FROM_CART'
     );
-    newState = productHelper(newState, itemToDelete, 'RESTOCK_AFTER_DELETE');
+    newState = productHelper(newState, itemToDelete, 'DELETE_FROM_CART');
     expect(newState.cart.size).toBe(0);
     expect(newState.cartCount).toBe(0);
     expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
