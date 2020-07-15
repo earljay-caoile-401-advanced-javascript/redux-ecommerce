@@ -64,7 +64,7 @@ function SimpleCart(props) {
       totalCost += value.price * value.quantity;
 
       cartListToRender.push(
-        <ListItem key={key}>
+        <ListItem key={key} className="fade-in">
           <ListItemIcon>{itemIcon}</ListItemIcon>
           <ListItemText
             primary={value.displayName || value.name}
