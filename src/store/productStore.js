@@ -1,3 +1,5 @@
+'use strict';
+
 const sampleData = require('../data/db.json');
 const productMap = new Map();
 
