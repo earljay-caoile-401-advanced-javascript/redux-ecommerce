@@ -75,14 +75,14 @@ function SimpleCart(props) {
               props.incrementItem(value);
             }}
           >
-            <ArrowUpwardIcon />
+            <ArrowUpwardIcon className="item-change" />
           </Button>
           <Button
             onClick={() => {
               props.decrementItem(value);
             }}
           >
-            <ArrowDownwardIcon />
+            <ArrowDownwardIcon className="item-change" />
           </Button>
           <Button
             color="secondary"
@@ -99,7 +99,7 @@ function SimpleCart(props) {
 
   return (
     <Drawer
-      id="cart-collapse"
+      id="simple-cart"
       className={props.classes.drawer}
       variant="persistent"
       anchor="right"
@@ -130,7 +130,7 @@ function SimpleCart(props) {
       </div>
       <Divider />
       {cartListToRender.length ? (
-        <List>{cartListToRender}</List>
+        <List id="cart-list-body">{cartListToRender}</List>
       ) : (
         <Grid
           container

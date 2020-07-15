@@ -5,6 +5,12 @@
   padding-right: $spacing;
 }
 
+#cart-list-body {
+  .item-change {
+    color: $darkBlue;
+  }
+}
+
 #no-items {
   margin-top: $spacing;
   margin-bottom: $spacing;
