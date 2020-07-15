@@ -11,7 +11,6 @@ import {
   ListItemText,
   Button,
   Grid,
-  Container,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -145,6 +144,7 @@ function SimpleCart(props) {
           direction="column"
           justify="space-around"
           alignItems="center"
+          style={{ marginTop: '.5em' }}
         >
           <Grid item>
             <Typography variant="h5">Your cart appears to be empty!</Typography>
