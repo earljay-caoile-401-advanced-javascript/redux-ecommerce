@@ -62,6 +62,7 @@ function SimpleCart(props) {
       }
 
       totalCost += value.price * value.quantity;
+      totalCost = Math.round(totalCost * 100) / 100; // voodoo to avoid weird rounding errors with decimals
 
       cartListToRender.push(
         <ListItem key={key} className="fade-in">

@@ -19,6 +19,7 @@ Labs 29 and 31 for CF JS 401 Nights
 
 - [Three cards in a row instead of all cards in one column](https://stackoverflow.com/questions/51595156/three-cards-in-a-row-instead-of-all-cards-in-one-column)
 - [CSS Gradient](https://cssgradient.io/)
+- [Precise Financial Calculation in JavaScript. What Are the Gotchas?](https://stackoverflow.com/questions/2876536/precise-financial-calculation-in-javascript-what-are-the-gotchas)
 
 ### Documentation
 
