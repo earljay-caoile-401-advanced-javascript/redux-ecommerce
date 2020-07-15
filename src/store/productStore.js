@@ -14,7 +14,7 @@ const initState = {
 };
 
 /**
- * Reducer that handles updating product state. Part of the mega reducer formed in the index file
+ * Reducer that handles updating product state. Part of the mega reducer formed in the index file.
  * When using the real app, this reducer automatically gets called when another reducer is called.
  * This allows the cart reducer to be used in other components, but this reducer also gets called. It's magic.
  * @param {Object} state - initial or current state

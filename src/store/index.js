@@ -4,10 +4,8 @@ import categoryStore from './categoryStore.js';
 import productStore from './productStore.js';
 
 /**
- * mother of all reducers that takes child reducers and combines them for use in a React store
- * takes current state and updates it based on the action
- * @param {Object} state - state of the Redux store
- * @param {Object} action - object typically containing a type and a payload
+ * Mother of all reducers that takes child reducers and combines them for use in a React store.
+ * Takes current state and updates it based on the action.
  */
 const reducers = combineReducers({
   cartStore,
