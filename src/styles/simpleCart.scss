@@ -6,8 +6,11 @@
 }
 
 #no-items {
+  margin-top: $spacing;
+  margin-bottom: $spacing;
+
   .MuiGrid-item {
-    margin: $spacing auto;
+    margin: $spacing * 0.75 auto;
   }
 
   .big-smiley {
