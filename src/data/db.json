@@ -4,14 +4,14 @@
       "_id": "5e810625ed0676292430be68",
       "name": "mythical_weapons",
       "displayName": "Mythical Weapons",
-      "description": "I shall smite thee!",
+      "description": "I shall smite thee! There is only one item of each available.",
       "__v": 0
     },
     {
       "_id": "5e81063bed0676292430be69",
       "name": "health_house_baby",
       "displayName": "Health, Household, and Baby Care",
-      "description": "Stuff fo yo crib!",
+      "description": "Stuff fo yo crib! Test out adding an item with only two in stock.",
       "__v": 0
     },
     {

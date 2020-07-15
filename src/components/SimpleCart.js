@@ -116,7 +116,7 @@ function SimpleCart(props) {
         paper: props.classes.drawerPaper,
       }}
     >
-      <div className={props.classes.drawerHeader}>
+      <div className={props.classes.drawerHeader} id="cart-list-header">
         <IconButton onClick={() => props.setOpenRight(false)}>
           {props.theme.direction === 'rtl' ? (
             <ChevronLeftIcon />

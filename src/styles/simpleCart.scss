@@ -1,5 +1,10 @@
 @import 'variables';
 
+#cart-list-header {
+  padding-left: 0;
+  padding-right: $spacing;
+}
+
 #no-items {
   margin-top: $spacing / 2;
 
