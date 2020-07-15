@@ -18,14 +18,14 @@
       "_id": "5e810645ed0676292430be6a",
       "name": "electronics",
       "displayName": "Electronics",
-      "description": "Beep boop bzzt!",
+      "description": "Beep boop bzzt! Testing more than 4 items to see scaling at different widths.",
       "__v": 0
     },
     {
       "_id": "5e810645ed0676292430be6b",
       "name": "food",
       "displayName": "Food",
-      "description": "Nom nom nom!",
+      "description": "Nom nom nom! Two items and decimals.",
       "__v": 0
     }
   ],
