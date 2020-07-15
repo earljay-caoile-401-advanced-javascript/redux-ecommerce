@@ -4,7 +4,7 @@ import categoryStore from './categoryStore.js';
 import productStore from './productStore.js';
 
 /**
- * multi-functional reducer used for components that connect to the Redux store
+ * mother of all reducers that takes child reducers and combines them for use in a React store
  * takes current state and updates it based on the action
  * @param {Object} state - state of the Redux store
  * @param {Object} action - object typically containing a type and a payload

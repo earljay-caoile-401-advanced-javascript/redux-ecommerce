@@ -11,6 +11,7 @@ import {
   ListItemText,
   Button,
   Grid,
+  Container,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -22,6 +23,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ColorizeIcon from '@material-ui/icons/Colorize';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import {
   removeFromCart,
   incrementItem,
@@ -33,6 +35,10 @@ import {
   restockAfterDelete,
 } from '../store/productStore';
 
+/**
+ * Component that renders a list of cart items. Allows users to increment, decrement, and delete
+ * @param {Object} props - props passed on from the Header component
+ */
 function SimpleCart(props) {
   const cartListToRender = [];
   const propCart = props.cart;
@@ -130,7 +136,24 @@ function SimpleCart(props) {
         </Grid>
       </div>
       <Divider />
-      <List>{cartListToRender}</List>
+      {cartListToRender.length ? (
+        <List>{cartListToRender}</List>
+      ) : (
+        <Grid
+          container
+          spacing={3}
+          direction="column"
+          justify="space-around"
+          alignItems="center"
+        >
+          <Grid item>
+            <Typography variant="h5">Your cart appears to be empty!</Typography>
+          </Grid>
+          <Grid item>
+            <SentimentVeryDissatisfiedIcon />
+          </Grid>
+        </Grid>
+      )}
     </Drawer>
   );
 }

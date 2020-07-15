@@ -2,7 +2,7 @@
 
 ## E-Commerce Store with Material UI plus Reducer Refactor
 
-Labs 29 and 31 and for CF JS 401 Nights
+Labs 29 and 31 for CF JS 401 Nights
 
 ### Author: Earl Jay Caoile
 
