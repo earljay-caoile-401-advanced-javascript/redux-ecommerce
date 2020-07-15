@@ -23,6 +23,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {
   removeFromCart,
   incrementItem,
@@ -150,7 +151,17 @@ function SimpleCart(props) {
             <Typography variant="h5">Your cart appears to be empty!</Typography>
           </Grid>
           <Grid item>
-            <SentimentVeryDissatisfiedIcon />
+            <SentimentVeryDissatisfiedIcon style={{ fontSize: '50px' }} />
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => props.setOpenRight(false)}
+            >
+              <ArrowBackIcon style={{ marginRight: '.25em' }} />
+              <Typography variant="h6">Return to Shopping</Typography>
+            </Button>
           </Grid>
         </Grid>
       )}
