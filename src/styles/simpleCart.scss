@@ -1,0 +1,15 @@
+@import 'variables';
+
+#no-items {
+  margin-top: $spacing / 2;
+
+  .big-smiley {
+    font-size: 50px;
+  }
+
+  #back-to-shopping-btn {
+    svg {
+      margin-right: $spacing / 4;
+    }
+  }
+}

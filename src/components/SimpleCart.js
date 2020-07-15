@@ -34,6 +34,7 @@ import {
   incrementFromDownArrow,
   restockAfterDelete,
 } from '../store/productStore';
+import '../styles/simpleCart.scss';
 
 /**
  * Component that renders a list of cart items. Allows users to increment, decrement, and delete
@@ -141,25 +142,26 @@ function SimpleCart(props) {
       ) : (
         <Grid
           container
+          id="no-items"
           spacing={3}
           direction="column"
           justify="space-around"
           alignItems="center"
-          style={{ marginTop: '.5em' }}
         >
           <Grid item>
             <Typography variant="h5">Your cart appears to be empty!</Typography>
           </Grid>
           <Grid item>
-            <SentimentVeryDissatisfiedIcon style={{ fontSize: '50px' }} />
+            <SentimentVeryDissatisfiedIcon className="big-smiley" />
           </Grid>
           <Grid item>
             <Button
               variant="contained"
               color="primary"
               onClick={() => props.setOpenRight(false)}
+              id="back-to-shopping-btn"
             >
-              <ArrowBackIcon style={{ marginRight: '.25em' }} />
+              <ArrowBackIcon />
               <Typography variant="h6">Return to Shopping</Typography>
             </Button>
           </Grid>
