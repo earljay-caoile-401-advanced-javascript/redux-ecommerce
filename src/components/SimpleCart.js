@@ -143,7 +143,6 @@ function SimpleCart(props) {
         <Grid
           container
           id="no-items"
-          spacing={3}
           direction="column"
           justify="space-around"
           alignItems="center"

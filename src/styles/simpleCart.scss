@@ -6,10 +6,12 @@
 }
 
 #no-items {
-  margin-top: $spacing / 2;
+  .MuiGrid-item {
+    margin: $spacing auto;
+  }
 
   .big-smiley {
-    font-size: 50px;
+    font-size: 55px;
   }
 
   #back-to-shopping-btn {
