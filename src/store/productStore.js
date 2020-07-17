@@ -1,13 +1,9 @@
-const sampleData = require('../data/db.json');
-const productMap = new Map();
-
 /**
  * Yes, I'm a madman and I put the products into a map instead of using an array.
  * I couldn't resist O(1) lookup
  */
-sampleData.products.forEach((product) => {
-  productMap.set(product._id, product);
-});
+const sampleData = require('../data/db.json');
+const productMap = new Map(sampleData.products.map((prod) => [prod._id, prod]));
 
 const initState = {
   products: productMap,
