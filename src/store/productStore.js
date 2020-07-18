@@ -2,8 +2,8 @@
  * Yes, I'm a madman and I put the products into a map instead of using an array.
  * I couldn't resist O(1) lookup
  */
-const sampleData = require('../data/db.json');
-const productMap = new Map(sampleData.products.map((prod) => [prod._id, prod]));
+// const sampleData = require('../data/db.json');
+const productMap = new Map();
 
 const initState = {
   products: productMap,
@@ -17,10 +17,14 @@ const initState = {
  * @param {Object} action - object containing information to update product state
  */
 const productReducer = (state = initState, action) => {
+  const { type, payload } = action;
   const newState = { ...state };
   let prevProd;
 
-  switch (action.type) {
+  switch (type) {
+    case 'GET_PRODUCTS':
+      newState.products = new Map(payload.map((obj) => [obj._id, obj]));
+      break;
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
       if (action.payload.stock) {

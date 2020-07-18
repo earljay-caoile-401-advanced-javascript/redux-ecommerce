@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Card,
@@ -11,6 +11,7 @@ import {
   Grid,
 } from '@material-ui/core';
 import { addToCart } from '../store/cartStore';
+import * as actions from '../store/products-actions';
 
 /**
  * Component that renders the list of products as cards
@@ -23,6 +24,12 @@ import { addToCart } from '../store/cartStore';
  * )
  */
 function Products(props) {
+  const { getProducts } = props;
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
   const prodsToRender = [];
   const propProds = props.products;
 
@@ -96,6 +103,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { addToCart };
+const mapDispatchToProps = (dispatch, getState) => ({
+  getProducts: (data) => dispatch(actions.get(data)),
+  addToCart,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
