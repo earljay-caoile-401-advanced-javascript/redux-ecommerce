@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import { render } from 'enzyme';
 import Footer from '../components/Footer';

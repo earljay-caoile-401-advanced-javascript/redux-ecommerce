@@ -10,6 +10,7 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
+import { addToCart } from '../store/cartStore';
 
 /**
  * Component that renders the list of products as cards
@@ -61,10 +62,7 @@ function Products(props) {
                   color="primary"
                   disabled={!product.stock}
                   onClick={() => {
-                    props.dispatch({
-                      type: 'ADD_TO_CART',
-                      payload: product,
-                    });
+                    props.addToCart(product);
                   }}
                 >
                   Add to Cart
@@ -92,10 +90,12 @@ function Products(props) {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
-    currentCategory: state.currentCategory,
-    cart: state.cart,
+    products: state.productStore.products,
+    currentCategory: state.categoryStore.currentCategory,
+    cartCount: state.cartStore.cartCount,
   };
 };
 
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = { addToCart };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

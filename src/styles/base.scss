@@ -102,10 +102,6 @@ code {
   .cont-child {
     margin: 2em auto;
   }
-
-  @media (max-height: 1080px) {
-    margin-top: $spacing * 8;
-  }
 }
 
 .fade-in {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
+import SimpleCart from './SimpleCart';
 import '../styles/header.scss';
 import {
   AppBar,
@@ -17,23 +18,55 @@ import {
 } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
+
+const drawerWidth = 350;
+
+const useCollapseNavStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
   },
-  list: {
+  topList: {
     width: 250,
   },
   fullList: {
     width: 'auto',
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: drawerWidth,
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-start',
   },
 }));
 
@@ -47,9 +80,10 @@ const useStyles = makeStyles((theme) => ({
  * )
  */
 function Header(props) {
-  const classes = useStyles();
+  const classes = useCollapseNavStyles();
+  const theme = useTheme();
   const [openTop, setOpenTop] = useState(false);
-
+  const [openRight, setOpenRight] = useState(false);
   const toggleDrawer = (open) => (event) => {
     if (
       event &&
@@ -62,9 +96,9 @@ function Header(props) {
     setOpenTop(open);
   };
 
-  const collapseList = () => (
+  const collapseNavList = () => (
     <div
-      className={clsx(classes.list, {
+      className={clsx(classes.topList, {
         [classes.fullList]: 'top',
       })}
       role="presentation"
@@ -72,11 +106,11 @@ function Header(props) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button key={'cart'}>
+        <ListItem button key={'cart'} onClick={() => setOpenRight(true)}>
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
-          <ListItemText primary={`Cart: (${props.cart.length})`} />
+          <ListItemText primary={`Cart: (${props.cartCount})`} />
         </ListItem>
       </List>
       <Divider />
@@ -92,43 +126,55 @@ function Header(props) {
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar position="fixed" id="main-header">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            id="nav-icon"
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <SwipeableDrawer
-            anchor={'top'}
-            open={openTop}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-          >
-            {collapseList()}
-          </SwipeableDrawer>
-          <Typography variant="h6" className={classes.title}>
-            Dat Online Store
-          </Typography>
-          <Button
-            color="inherit"
-            id="nav-cart"
-          >{`Cart (${props.cart.length})`}</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar
+      position="fixed"
+      id="main-header"
+      className={clsx(classes.appBar, {
+        [classes.appBarShift]: openRight,
+      })}
+    >
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="menu"
+          id="nav-icon"
+          onClick={toggleDrawer(true)}
+        >
+          <MenuIcon />
+        </IconButton>
+        <SwipeableDrawer
+          anchor={'top'}
+          open={openTop}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+        >
+          {collapseNavList()}
+        </SwipeableDrawer>
+        <Typography variant="h6" className={classes.title}>
+          Dat Online Store
+        </Typography>
+        <Button
+          color="inherit"
+          id="nav-cart"
+          onClick={() => setOpenRight(!openRight)}
+        >{`Cart (${props.cartCount})`}</Button>
+      </Toolbar>
+      <SimpleCart
+        theme={theme}
+        openRight={openRight}
+        setOpenRight={setOpenRight}
+        classes={classes}
+      />
+    </AppBar>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cartStore.cart,
+    cartCount: state.cartStore.cartCount,
   };
 };
 

@@ -14,7 +14,7 @@ import '../styles/categories.scss';
  * )
  */
 function ActiveCategory(props) {
-  return (
+  return props.currentCategory ? (
     <div id="active-category">
       <Typography variant="h3">
         {(
@@ -25,12 +25,12 @@ function ActiveCategory(props) {
         {props.currentCategory.description}
       </Typography>
     </div>
-  );
+  ) : null;
 }
 
 const mapStateToProps = (state) => {
   return {
-    currentCategory: state.currentCategory,
+    currentCategory: state.categoryStore.currentCategory,
   };
 };
 

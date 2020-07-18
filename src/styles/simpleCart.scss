@@ -1,0 +1,31 @@
+@import 'variables';
+
+#cart-list-header {
+  padding-left: 0;
+  padding-right: $spacing;
+}
+
+#cart-list-body {
+  .item-change {
+    color: $darkBlue;
+  }
+}
+
+#no-items {
+  margin-top: $spacing;
+  margin-bottom: $spacing;
+
+  .MuiGrid-item {
+    margin: $spacing * 0.75 auto;
+  }
+
+  .big-smiley {
+    font-size: 55px;
+  }
+
+  #back-to-shopping-btn {
+    svg {
+      margin-right: $spacing / 4;
+    }
+  }
+}

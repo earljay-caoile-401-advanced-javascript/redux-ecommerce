@@ -4,68 +4,79 @@
       "_id": "5e810625ed0676292430be68",
       "name": "mythical_weapons",
       "displayName": "Mythical Weapons",
-      "description": "I shall smite thee!",
+      "description": "I shall smite thee! There is only one item of each available.",
       "__v": 0
     },
     {
       "_id": "5e81063bed0676292430be69",
       "name": "health_house_baby",
       "displayName": "Health, Household, and Baby Care",
-      "description": "Stuff fo yo crib!",
+      "description": "Stuff fo yo crib! Test out adding an item with only two in stock.",
       "__v": 0
     },
     {
       "_id": "5e810645ed0676292430be6a",
       "name": "electronics",
       "displayName": "Electronics",
-      "description": "Beep boop bzzt!",
+      "description": "Beep boop bzzt! Testing more than 4 items to see scaling at different widths.",
       "__v": 0
     },
     {
       "_id": "5e810645ed0676292430be6b",
       "name": "food",
       "displayName": "Food",
-      "description": "Nom nom nom!",
+      "description": "Nom nom nom! Two items and decimals.",
       "__v": 0
     }
   ],
   "products": [
     {
-      "name": "TV",
+      "_id": "42c2d476-3349-415e-994b-edf534b8aa4c",
+      "name": "tv",
+      "displayName": "TV",
       "description": "See all the things",
       "stock": 5,
       "price": 400,
       "category": "electronics"
     },
     {
-      "name": "Macbook",
+      "_id": "11a4bc6e-30c6-4e2b-b30b-bf285af0528d",
+      "name": "macbook",
+      "displayName": "Macbook",
       "description": "Do all the things",
       "stock": 7,
       "price": 1200,
       "category": "electronics"
     },
     {
-      "name": "Carrot",
+      "_id": "82bfbccf-7a7e-46d4-a037-d7e33125e906",
+      "category": "food",
+      "name": "carrot",
+      "displayName": "Carrot",
       "description": "Crunch all the things",
       "stock": 25,
-      "price": 0.3,
-      "category": "food"
+      "price": 0.3
     },
     {
-      "name": "Cake",
+      "_id": "6a64f6a4-f233-4f32-955c-0d6d5b0786e1",
+      "category": "food",
+      "name": "cake",
+      "displayName": "Cake",
       "description": "Lie all the things",
       "stock": 10,
-      "price": 5,
-      "category": "food"
+      "price": 5
     },
     {
-      "name": "Divine Rapier",
+      "_id": "204a3d62-fc02-4bdd-a3bd-feb6bd12dc2d",
+      "category": "mythical_weapons",
+      "name": "divine_rapier",
+      "displayName": "Divine Rapier",
       "description": "So powerful, it cannot have a single owner.",
       "stock": 1,
-      "price": 6000,
-      "category": "mythical_weapons"
+      "price": 6000
     },
     {
+      "_id": "5e87f12c22443353e4300820",
       "category": "mythical_weapons",
       "name": "mjolnir",
       "displayName": "Mjolnir",
@@ -74,6 +85,7 @@
       "price": 5600
     },
     {
+      "_id": "5e87f1a822443353e4300821",
       "category": "mythical_weapons",
       "name": "gungnir",
       "displayName": "Gungnir",
@@ -82,6 +94,7 @@
       "description": "Odin's spear. It supposedly doesn't miss..."
     },
     {
+      "_id": "5e8bc1f57dffb9a79147e82b",
       "category": "health_house_baby",
       "name": "adhesive_medical_strips",
       "displayName": "Adhesive Medical Strips",
@@ -90,6 +103,7 @@
       "price": 1
     },
     {
+      "_id": "5e8bc1fed6d43bae52531d4b",
       "category": "electronics",
       "name": "amd_ryzen_9_3950x",
       "displayName": "AMD Ryzen 9 3950X",
@@ -98,6 +112,7 @@
       "price": 750
     },
     {
+      "_id": "5e8bc267b2411d8502b69117",
       "category": "electronics",
       "name": "intel_core_i9_9900k",
       "displayName": "Intel Core i9-9900k",
@@ -106,6 +121,7 @@
       "price": 500
     },
     {
+      "_id": "5e8bc2765355fe493ac01ade",
       "category": "electronics",
       "name": "sennheiser_hd_650",
       "displayName": "Sennheiser HD 650",
