@@ -67,6 +67,7 @@ function SimpleCart(props) {
             secondary={value.quantity}
           />
           <Button
+            disabled={!value.stock}
             onClick={() => {
               props.incrementItem(value);
             }}
