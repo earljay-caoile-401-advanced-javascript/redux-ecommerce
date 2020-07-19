@@ -70,12 +70,34 @@ describe('reducer', () => {
         payload: sampleData.products[0],
       }
     );
-    newState = productHelper(newState, sampleData.products[0], 'ADD_TO_CART');
+
+    newState = productHelper(
+      newState,
+      {
+        ...sampleData.products[0],
+        stock: sampleData.products[0].stock - 1,
+      },
+      'ADD_TO_CART'
+    );
 
     newState = cartHelper(newState, sampleData.products[1], 'ADD_TO_CART');
-    newState = productHelper(newState, sampleData.products[1], 'ADD_TO_CART');
+    newState = productHelper(
+      newState,
+      {
+        ...sampleData.products[1],
+        stock: sampleData.products[1].stock - 1,
+      },
+      'ADD_TO_CART'
+    );
     newState = cartHelper(newState, sampleData.products[2], 'ADD_TO_CART');
-    newState = productHelper(newState, sampleData.products[2], 'ADD_TO_CART');
+    newState = productHelper(
+      newState,
+      {
+        ...sampleData.products[2],
+        stock: sampleData.products[2].stock - 1,
+      },
+      'ADD_TO_CART'
+    );
     expect(newState.cart.size).toBe(3);
 
     newState = cartHelper(
@@ -83,9 +105,14 @@ describe('reducer', () => {
       newState.cart.get(sampleData.products[0]._id),
       'INCREMENT_ITEM'
     );
+
+    let prevProd = newState.products.get(sampleData.products[0]._id);
     newState = productHelper(
       newState,
-      newState.products.get(sampleData.products[0]._id),
+      {
+        ...prevProd,
+        stock: prevProd.stock - 1,
+      },
       'INCREMENT_ITEM'
     );
     expect(newState.cart.size).toBe(3);
@@ -96,13 +123,20 @@ describe('reducer', () => {
       newState.cart.get(sampleData.products[0]._id),
       'INCREMENT_ITEM'
     );
+
+    prevProd = newState.products.get(sampleData.products[0]._id);
     newState = productHelper(
       newState,
-      newState.products.get(sampleData.products[0]._id),
+      {
+        ...prevProd,
+        stock: prevProd.stock - 1,
+      },
       'INCREMENT_ITEM'
     );
+
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(5);
+
     expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
       sampleData.products[0].stock - 3
     );

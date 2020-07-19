@@ -24,12 +24,8 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {
-  removeFromCart,
-  incrementItem,
-  decrementItem,
-} from '../store/cartStore';
 import '../styles/simpleCart.scss';
+import * as actions from '../store/products-actions';
 
 /**
  * Component that renders a list of cart items. Allows users to increment, decrement, and delete
@@ -87,7 +83,7 @@ function SimpleCart(props) {
           <Button
             color="secondary"
             onClick={() => {
-              props.removeFromCart(value);
+              props.removeItem(value);
             }}
           >
             <DeleteForeverIcon />
@@ -171,10 +167,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  removeFromCart,
-  incrementItem,
-  decrementItem,
-};
+const mapDispatchToProps = (dispatch) => ({
+  incrementItem: (data) => dispatch(actions.increment(data)),
+  decrementItem: (data) => dispatch(actions.decrement(data)),
+  removeItem: (data) => dispatch(actions.remove(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

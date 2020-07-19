@@ -2,8 +2,6 @@
  * Yes, I'm a madman and I put the products into a map instead of using an array.
  * I couldn't resist O(1) lookup
  */
-// const sampleData = require('../data/db.json');
-
 const initState = {
   products: new Map(),
 };
@@ -26,20 +24,8 @@ const productReducer = (state = initState, action) => {
       break;
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
-      if (action.payload.stock > 0) {
-        prevProd = newState.products.get(action.payload._id);
-        newState.products.set(action.payload._id, {
-          ...prevProd,
-          stock: prevProd.stock - 1,
-        });
-      }
-      break;
     case 'DECREMENT_ITEM':
-      prevProd = newState.products.get(action.payload._id);
-      newState.products.set(action.payload._id, {
-        ...prevProd,
-        stock: prevProd.stock + 1,
-      });
+      newState.products.set(action.payload._id, action.payload);
       break;
     case 'DELETE_FROM_CART':
       prevProd = newState.products.get(action.payload._id);

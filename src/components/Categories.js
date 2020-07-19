@@ -62,8 +62,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getCategories: (data) => dispatch(actions.get(data)),
-  changeCategory: (data) => dispatch(actions.changeCategory(data)),
+  getCategories: () => dispatch(actions.get()),
+  changeCategory: (payload) => dispatch(actions.changeCategory(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

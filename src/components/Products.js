@@ -104,8 +104,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getProducts: (data) => dispatch(actions.get(data)),
-  addToCart: (data) => dispatch(addToCart(data)),
+  getProducts: () => dispatch(actions.get()),
+  addToCart: (data) => dispatch(actions.increment(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
