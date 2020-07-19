@@ -24,8 +24,12 @@ const productReducer = (state = initState, action) => {
       break;
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
+      console.log('payload stock in product reducer?', payload.stock);
+      if (payload.stock >= 0) {
+        newState.products.set(payload._id, payload);
+      }
     case 'DECREMENT_ITEM':
-      newState.products.set(action.payload._id, action.payload);
+      newState.products.set(payload._id, payload);
       break;
     case 'DELETE_FROM_CART':
       prevProd = newState.products.get(action.payload._id);

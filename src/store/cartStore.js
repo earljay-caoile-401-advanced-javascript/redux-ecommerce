@@ -18,7 +18,7 @@ const cartReducer = (state = initState, action) => {
       console.log('What is payload stock?', payload.stock);
       if (payload.stock >= 0) {
         const prevCartObj = newState.cart.get(payload._id);
-        newState.cart.set(action.payload._id, {
+        newState.cart.set(payload._id, {
           ...(prevCartObj || payload),
           quantity: (prevCartObj ? prevCartObj.quantity : 0) + 1,
           stock: payload.stock,
@@ -49,33 +49,5 @@ const cartReducer = (state = initState, action) => {
 
   return newState;
 };
-
-// export const addToCart = (item) => {
-//   return {
-//     type: 'ADD_TO_CART',
-//     payload: item,
-//   };
-// };
-
-// export const removeFromCart = (item) => {
-//   return {
-//     type: 'DELETE_FROM_CART',
-//     payload: item,
-//   };
-// };
-
-// export const incrementItem = (item) => {
-//   return {
-//     type: 'INCREMENT_ITEM',
-//     payload: item,
-//   };
-// };
-
-// export const decrementItem = (item) => {
-//   return {
-//     type: 'DECREMENT_ITEM',
-//     payload: item,
-//   };
-// };
 
 export default cartReducer;
