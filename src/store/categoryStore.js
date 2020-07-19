@@ -1,5 +1,3 @@
-const sampleData = require('../data/db.json');
-
 const initState = {
   categories: [],
   currentCategory: '',

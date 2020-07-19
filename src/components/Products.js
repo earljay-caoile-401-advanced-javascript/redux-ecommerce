@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Card,
@@ -10,8 +10,8 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-import { addToCart } from '../store/cartStore';
 import * as actions from '../store/products-actions';
+import axios from 'axios';
 
 /**
  * Component that renders the list of products as cards
@@ -25,6 +25,17 @@ import * as actions from '../store/products-actions';
  */
 function Products(props) {
   const { getProducts } = props;
+  const [reqIsPending, setReqIsPending] = useState(false);
+  axios.interceptors.response.use(
+    function (response) {
+      setReqIsPending(false);
+      return response;
+    },
+    function (error) {
+      setReqIsPending(false);
+      return Promise.reject(error);
+    }
+  );
 
   useEffect(() => {
     getProducts();
@@ -67,8 +78,9 @@ function Products(props) {
                 <Button
                   size="small"
                   color="primary"
-                  disabled={!product.stock}
+                  disabled={!product.stock || reqIsPending}
                   onClick={() => {
+                    setReqIsPending(true);
                     props.addToCart(product);
                   }}
                 >

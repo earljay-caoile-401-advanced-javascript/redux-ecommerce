@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Drawer,
@@ -26,12 +26,25 @@ import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissa
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../styles/simpleCart.scss';
 import * as actions from '../store/products-actions';
+import axios from 'axios';
 
 /**
  * Component that renders a list of cart items. Allows users to increment, decrement, and delete
  * @param {Object} props - props passed on from the Header component
  */
 function SimpleCart(props) {
+  const [reqIsPending, setReqIsPending] = useState(false);
+  axios.interceptors.response.use(
+    function (response) {
+      setReqIsPending(false);
+      return response;
+    },
+    function (error) {
+      setReqIsPending(false);
+      return Promise.reject(error);
+    }
+  );
+
   const cartListToRender = [];
   const propCart = props.cart;
 
@@ -67,15 +80,18 @@ function SimpleCart(props) {
             secondary={value.quantity}
           />
           <Button
-            disabled={!value.stock}
+            disabled={!value.stock || reqIsPending}
             onClick={() => {
+              setReqIsPending(true);
               props.incrementItem(value);
             }}
           >
             <ArrowUpwardIcon className="item-change" />
           </Button>
           <Button
+            disabled={reqIsPending}
             onClick={() => {
+              setReqIsPending(true);
               props.decrementItem(value);
             }}
           >

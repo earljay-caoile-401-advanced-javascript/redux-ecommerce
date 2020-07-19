@@ -8,7 +8,6 @@ export const get = () => async (dispatch) => {
 };
 
 export const increment = (payload) => async (dispatch) => {
-  console.log('payload stock in increment?', payload.stock);
   if (payload.stock > 0) {
     const response = await axios.put(
       `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${payload._id}`,

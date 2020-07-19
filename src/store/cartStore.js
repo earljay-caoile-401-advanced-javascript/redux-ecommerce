@@ -15,7 +15,6 @@ const cartReducer = (state = initState, action) => {
   switch (type) {
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
-      console.log('What is payload stock?', payload.stock);
       if (payload.stock >= 0) {
         const prevCartObj = newState.cart.get(payload._id);
         newState.cart.set(payload._id, {
