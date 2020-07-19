@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Select, MenuItem } from '@material-ui/core';
 import '../styles/categories.scss';
-import { changeCategory } from '../store/categoryStore';
+import * as actions from '../store/categories-actions.js';
 
 /**
  * Component that renders the list of categories as a dropdown with a title
@@ -15,6 +15,12 @@ import { changeCategory } from '../store/categoryStore';
  * )
  */
 function Categories(props) {
+  const { getCategories } = props;
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
+
   const catsToRender = [];
   const propCats = props.categories;
 
@@ -55,6 +61,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { changeCategory };
+const mapDispatchToProps = (dispatch) => ({
+  getCategories: (data) => dispatch(actions.get(data)),
+  changeCategory: (data) => dispatch(actions.changeCategory(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

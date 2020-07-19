@@ -3,10 +3,9 @@
  * I couldn't resist O(1) lookup
  */
 // const sampleData = require('../data/db.json');
-const productMap = new Map();
 
 const initState = {
-  products: productMap,
+  products: new Map(),
 };
 
 /**
@@ -27,7 +26,7 @@ const productReducer = (state = initState, action) => {
       break;
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
-      if (action.payload.stock) {
+      if (action.payload.stock > 0) {
         prevProd = newState.products.get(action.payload._id);
         newState.products.set(action.payload._id, {
           ...prevProd,
