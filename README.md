@@ -1,8 +1,8 @@
-# Lab 31: Redux - Combined Reducers
+# Lab 32: Redux - Asynchronous Actions
 
-## E-Commerce Store with Material UI plus Reducer Refactor
+## E-Commerce Store with Material UI, Reducer Refactor, and Async with an API
 
-Labs 29 and 31 for CF JS 401 Nights
+Labs 29, 31, and 32 for CF JS 401 Nights
 
 ### Author: Earl Jay Caoile
 
@@ -10,9 +10,9 @@ Labs 29 and 31 for CF JS 401 Nights
 
 #### Submission Reqs
 
-- [submission PR](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/pull/2)
+- [submission PR](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/pull/3)
 - [GitHub actions](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/actions)
-- [code sandbox](https://codesandbox.io/s/github/earljay-caoile-401-advanced-javascript/redux-ecommerce/tree/lab-31)
+- [code sandbox](https://codesandbox.io/s/github/earljay-caoile-401-advanced-javascript/redux-ecommerce/tree/lab-32)
 - [Netlify Deployment](https://nifty-goodall-fcbfde.netlify.app/)
 
 #### Resources
@@ -49,4 +49,4 @@ Labs 29 and 31 for CF JS 401 Nights
 
 ### UML
 
-![UML Image](lab-31-uml.png)
+![UML Image](lab-32-uml.png)
