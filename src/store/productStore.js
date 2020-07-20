@@ -32,10 +32,10 @@ const productReducer = (state = initState, action) => {
       newState.products.set(payload._id, payload);
       break;
     case 'DELETE_FROM_CART':
-      prevProd = newState.products.get(action.payload._id);
-      newState.products.set(action.payload._id, {
+      prevProd = newState.products.get(payload._id);
+      newState.products.set(payload._id, {
         ...prevProd,
-        stock: prevProd.stock + action.payload.quantity,
+        stock: prevProd.stock + payload.quantity,
       });
       break;
     default:

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import * as actions from '../store/products-actions';
 import axios from 'axios';
+import LoadingSpinner from './LoadingSpinner';
 
 /**
  * Component that renders the list of products as cards
@@ -24,10 +25,15 @@ import axios from 'axios';
  * )
  */
 function Products(props) {
-  const { getProducts } = props;
+  const { getProducts, products, currentCategory } = props;
   const [reqIsPending, setReqIsPending] = useState(false);
+  const [fetchingGet, setFetchingGet] = useState(false);
+
   axios.interceptors.response.use(
     function (response) {
+      if (response.data.results) {
+        setFetchingGet(false);
+      }
       setReqIsPending(false);
       return response;
     },
@@ -39,14 +45,14 @@ function Products(props) {
 
   useEffect(() => {
     getProducts();
+    setFetchingGet(true);
   }, [getProducts]);
 
   const prodsToRender = [];
-  const propProds = props.products;
 
-  if (propProds) {
-    propProds.forEach((product, i) => {
-      if (product.category === props.currentCategory.name) {
+  if (products) {
+    products.forEach((product, i) => {
+      if (product.category === currentCategory.name) {
         prodsToRender.push(
           <Grid item xs={12} sm={6} md={4} xl={3} key={i}>
             <Card>
@@ -100,6 +106,7 @@ function Products(props) {
   return (
     <div id="products" className="cont-child">
       <h2>Products</h2>
+      <LoadingSpinner loading={fetchingGet} />
       <Grid container spacing={4} direction="row" className="prod-grid">
         {prodsToRender}
       </Grid>
