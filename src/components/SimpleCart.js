@@ -34,6 +34,8 @@ import axios from 'axios';
  */
 function SimpleCart(props) {
   const [reqIsPending, setReqIsPending] = useState(false);
+  const { cart } = props;
+
   axios.interceptors.response.use(
     function (response) {
       setReqIsPending(false);
@@ -46,11 +48,10 @@ function SimpleCart(props) {
   );
 
   const cartListToRender = [];
-  const propCart = props.cart;
 
   let totalCost = 0;
-  if (propCart) {
-    propCart.forEach((value, key) => {
+  if (cart) {
+    cart.forEach((value, key) => {
       let itemIcon;
       switch (value.category) {
         case 'mythical_weapons':

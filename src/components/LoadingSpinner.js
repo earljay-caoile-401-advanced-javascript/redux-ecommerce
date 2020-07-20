@@ -11,7 +11,11 @@ import '../styles/spinner.scss';
 function LoadingSpinner(props) {
   return props.loading ? (
     <div className="loading">
-      <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: '100px' }} />
+      <FontAwesomeIcon
+        icon={faSpinner}
+        spin
+        style={{ fontSize: '100px', margin: '1.5em auto' }}
+      />
     </div>
   ) : null;
 }

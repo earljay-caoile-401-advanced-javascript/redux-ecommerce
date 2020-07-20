@@ -1,4 +1,5 @@
 import axios from 'axios';
+const sampleData = require('../data/db.json');
 
 export const get = () => async (dispatch) => {
   const response = await axios.get(
@@ -33,6 +34,27 @@ export const remove = (payload) => async (dispatch) => {
   dispatch(deleteFromCart({ ...response.data, quantity: payload.quantity }));
 };
 
+export const restock = () => async (dispatch) => {
+  const resProds = new Map();
+
+  for (const product of sampleData.products) {
+    const response = await axios.put(
+      `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${product._id}`,
+      {
+        category: product.category,
+        name: product.displayName,
+        description: product.description,
+        stock: product.stock,
+        price: product.price,
+      }
+    );
+
+    resProds.set(response.data._id, response.data);
+  }
+
+  dispatch(debugRestock(resProds));
+};
+
 const getProducts = (payload) => {
   return {
     type: 'GET_PRODUCTS',
@@ -40,23 +62,30 @@ const getProducts = (payload) => {
   };
 };
 
-const incrementItem = (item) => {
+const incrementItem = (payload) => {
   return {
     type: 'INCREMENT_ITEM',
-    payload: item,
+    payload,
   };
 };
 
-const decrementItem = (item) => {
+const decrementItem = (payload) => {
   return {
     type: 'DECREMENT_ITEM',
-    payload: item,
+    payload,
   };
 };
 
-const deleteFromCart = (item) => {
+const deleteFromCart = (payload) => {
   return {
     type: 'DELETE_FROM_CART',
-    payload: item,
+    payload,
+  };
+};
+
+const debugRestock = (payload) => {
+  return {
+    type: 'DEBUG_RESTOCK',
+    payload,
   };
 };

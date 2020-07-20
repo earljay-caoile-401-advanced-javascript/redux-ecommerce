@@ -13,6 +13,8 @@ import {
 import * as actions from '../store/products-actions';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
+import sampleData from '../data/db.json';
+const lastProd = sampleData.products[sampleData.products.length - 1];
 
 /**
  * Component that renders the list of products as cards
@@ -33,8 +35,15 @@ function Products(props) {
     function (response) {
       if (response.data.results) {
         setFetchingGet(false);
+      } else if (
+        response.data._id &&
+        response.data._id === lastProd._id &&
+        fetchingGet
+      ) {
+        setFetchingGet(false);
+      } else {
+        setReqIsPending(false);
       }
-      setReqIsPending(false);
       return response;
     },
     function (error) {
@@ -106,10 +115,27 @@ function Products(props) {
   return (
     <div id="products" className="cont-child">
       <h2>Products</h2>
-      <LoadingSpinner loading={fetchingGet} />
-      <Grid container spacing={4} direction="row" className="prod-grid">
-        {prodsToRender}
-      </Grid>
+      {fetchingGet ? (
+        <LoadingSpinner loading={fetchingGet} />
+      ) : (
+        <>
+          <Grid container spacing={4} direction="row" className="prod-grid">
+            {prodsToRender}
+          </Grid>
+          <Button
+            className="restock-debug"
+            variant="contained"
+            color="secondary"
+            style={{ margin: '10em auto' }}
+            onClick={() => {
+              setFetchingGet(true);
+              props.restock();
+            }}
+          >
+            Debug Button: Restock Inventory and Clear Cart
+          </Button>
+        </>
+      )}
     </div>
   );
 }
@@ -125,6 +151,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(actions.get()),
   addToCart: (data) => dispatch(actions.increment(data)),
+  restock: () => dispatch(actions.restock()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

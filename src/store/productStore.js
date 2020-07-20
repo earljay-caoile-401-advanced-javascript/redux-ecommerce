@@ -38,6 +38,9 @@ const productReducer = (state = initState, action) => {
         stock: prevProd.stock + payload.quantity,
       });
       break;
+    case 'DEBUG_RESTOCK':
+      newState.products = payload;
+      break;
     default:
       break;
   }

@@ -42,6 +42,10 @@ const cartReducer = (state = initState, action) => {
       newState.cartCount -= action.payload.quantity;
       newState.cart.delete(action.payload._id);
       break;
+    case 'DEBUG_RESTOCK':
+      newState.cart = new Map();
+      newState.cartCount = 0;
+      break;
     default:
       break;
   }
