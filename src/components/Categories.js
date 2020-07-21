@@ -15,17 +15,16 @@ import * as actions from '../store/categories-actions.js';
  * )
  */
 function Categories(props) {
-  const { getCategories } = props;
+  const { getCategories, categories } = props;
 
   useEffect(() => {
     getCategories();
   }, [getCategories]);
 
   const catsToRender = [];
-  const propCats = props.categories;
 
-  if (propCats) {
-    propCats.forEach((category, i) => {
+  if (categories) {
+    categories.forEach((category, i) => {
       catsToRender.push(
         <MenuItem
           className="menu-item"
