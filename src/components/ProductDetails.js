@@ -14,12 +14,21 @@ import {
   Grid,
 } from '@material-ui/core';
 import * as actions from '../store/products-actions';
+import '../styles/prodDetails.scss';
 
 function ProductDetails(props) {
   const [reqIsPending, setReqIsPending] = useState(false);
   const [fetchingGet, setFetchingGet] = useState(false);
   const [foundError, setFoundError] = useState(false);
-  const { activeProduct, location, getProductDetails } = props;
+  // const [relatedItems, setRelatedItems] = useState([]);
+
+  const {
+    activeProduct,
+    location,
+    getProducts,
+    getProductDetails,
+    products,
+  } = props;
 
   axios.interceptors.response.use(
     function (response) {
@@ -38,13 +47,51 @@ function ProductDetails(props) {
 
   useEffect(() => {
     setFetchingGet(true);
+
+    if (!products || !products.size) {
+      getProducts();
+    }
+
     getProductDetails(location.pathname);
 
     return () => {
       setReqIsPending(false);
+      setFetchingGet(false);
       setFoundError(false);
     };
   }, [getProductDetails, location.pathname]);
+
+  const relatedItems = [];
+
+  if (products) {
+    for (const prod of products.values()) {
+      if (
+        prod._id !== activeProduct._id &&
+        prod.category === activeProduct.category
+      ) {
+        relatedItems.push(
+          <Grid item xs={12} sm={6} md={4} key={prod._id}>
+            <CardActionArea
+              style={{
+                padding: '1em 0.5em',
+                textAlign: 'center',
+                background: 'teal',
+                color: 'white',
+              }}
+            >
+              <Typography variant="body1">
+                {prod.displayName || prod.name}
+              </Typography>
+            </CardActionArea>
+          </Grid>
+        );
+      }
+
+      if (relatedItems.length === 3) {
+        break;
+      }
+    }
+  }
 
   return fetchingGet ? (
     <LoadingSpinner loading={reqIsPending} />
@@ -52,13 +99,7 @@ function ProductDetails(props) {
     <h1>Error</h1>
   ) : (
     <Container>
-      <Grid
-        container
-        spacing={4}
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-      >
+      <Grid container spacing={4} direction="column" justify="space-between">
         <Grid item style={{ textAlign: 'center' }}>
           <Typography variant="h3">{activeProduct.name}</Typography>
           <br />
@@ -106,6 +147,21 @@ function ProductDetails(props) {
             Add to Cart
           </Button>
         </Grid>
+        {relatedItems.length ? (
+          <Grid item>
+            <Typography variant="h6">Related Items</Typography>
+            <br />
+            <Grid
+              container
+              spacing={3}
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              {relatedItems}
+            </Grid>
+          </Grid>
+        ) : null}
       </Grid>
     </Container>
   );
@@ -120,6 +176,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  getProducts: () => dispatch(actions.get()),
   getProductDetails: (data) => dispatch(actions.getOne(data)),
   addToCart: (data) => dispatch(actions.increment(data)),
 });

@@ -45,7 +45,6 @@ const productReducer = (state = initState, action) => {
       break;
     case 'VIEW_PRODUCT_DETAILS':
       newState.activeProduct = payload;
-      console.log('active product:', newState.activeProduct);
       break;
     case 'DEBUG_RESTOCK':
       newState.products = payload;

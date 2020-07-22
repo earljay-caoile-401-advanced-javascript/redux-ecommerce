@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { mount } from 'enzyme';
 import Header from '../components/Header';

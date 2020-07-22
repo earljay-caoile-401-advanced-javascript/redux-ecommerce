@@ -54,7 +54,10 @@ function Products(props) {
   );
 
   useEffect(() => {
-    getProducts();
+    if (!products || !products.size) {
+      getProducts();
+    }
+
     setFetchingGet(true);
   }, [getProducts]);
 
