@@ -1,8 +1,8 @@
-# Lab 32: Redux - Asynchronous Actions
+# Lab 32: Lab: Redux - Additional Topics
 
 ## E-Commerce Store with Material UI, Reducer Refactor, and Async with an API
 
-Labs 29, 31, and 32 for CF JS 401 Nights
+Labs 29, 31, 32, and 33 for CF JS 401 Nights
 
 ### Author: Earl Jay Caoile
 
@@ -10,9 +10,9 @@ Labs 29, 31, and 32 for CF JS 401 Nights
 
 #### Submission Reqs
 
-- [submission PR](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/pull/3)
+- [submission PR](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/pull/4)
 - [GitHub actions](https://github.com/earljay-caoile-401-advanced-javascript/redux-ecommerce/actions)
-- [code sandbox](https://codesandbox.io/s/github/earljay-caoile-401-advanced-javascript/redux-ecommerce/tree/lab-32)
+- [code sandbox](https://codesandbox.io/s/github/earljay-caoile-401-advanced-javascript/redux-ecommerce/tree/lab-33)
 - [Netlify Deployment](https://nifty-goodall-fcbfde.netlify.app/)
 
 #### Resources
@@ -20,6 +20,7 @@ Labs 29, 31, and 32 for CF JS 401 Nights
 - [Three cards in a row instead of all cards in one column](https://stackoverflow.com/questions/51595156/three-cards-in-a-row-instead-of-all-cards-in-one-column)
 - [CSS Gradient](https://cssgradient.io/)
 - [Precise Financial Calculation in JavaScript. What Are the Gotchas?](https://stackoverflow.com/questions/2876536/precise-financial-calculation-in-javascript-what-are-the-gotchas)
+- [Read the current full URL with React?](https://stackoverflow.com/questions/39823681/read-the-current-full-url-with-react)
 
 ### Documentation
 
@@ -49,4 +50,4 @@ Labs 29, 31, and 32 for CF JS 401 Nights
 
 ### UML
 
-![UML Image](lab-32-uml.png)
+![UML Image](lab-33-uml.png)

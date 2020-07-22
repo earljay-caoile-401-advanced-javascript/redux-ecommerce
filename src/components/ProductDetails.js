@@ -113,7 +113,7 @@ function ProductDetails(props) {
                 alt={`Image of ${
                   activeProduct.displayName || activeProduct.name
                 }`}
-                height="600"
+                height="500"
                 image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg"
                 title={activeProduct.displayName || activeProduct.name}
               />
@@ -130,7 +130,6 @@ function ProductDetails(props) {
                 </Grid>
               </CardContent>
             </CardActionArea>
-            <CardActions></CardActions>
           </Card>
         </Grid>
         <Grid item style={{ width: '100%' }}>
