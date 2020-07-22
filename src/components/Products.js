@@ -101,7 +101,13 @@ function Products(props) {
                 >
                   Add to Cart
                 </Button>
-                <Button size="small" color="primary">
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => {
+                    props.getProductDetails(product);
+                  }}
+                >
                   View Details
                 </Button>
               </CardActions>
@@ -143,6 +149,7 @@ function Products(props) {
 const mapStateToProps = (state) => {
   return {
     products: state.productStore.products,
+    activeProduct: state.productStore.activeProduct,
     currentCategory: state.categoryStore.currentCategory,
     cartCount: state.cartStore.cartCount,
   };
@@ -150,6 +157,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(actions.get()),
+  getProductDetails: (data) => dispatch(actions.getOne(data)),
   addToCart: (data) => dispatch(actions.increment(data)),
   restock: () => dispatch(actions.restock()),
 });

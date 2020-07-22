@@ -4,6 +4,7 @@
  */
 const initState = {
   products: new Map(),
+  activeProduct: {},
 };
 
 /**
@@ -37,6 +38,10 @@ const productReducer = (state = initState, action) => {
         ...prevProd,
         stock: prevProd.stock + payload.quantity,
       });
+      break;
+    case 'VIEW_PRODUCT_DETAILS':
+      newState.activeProduct = payload;
+      console.log('active product:', newState.activeProduct);
       break;
     case 'DEBUG_RESTOCK':
       newState.products = payload;

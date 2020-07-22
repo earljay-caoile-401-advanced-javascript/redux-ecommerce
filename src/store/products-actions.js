@@ -8,6 +8,14 @@ export const get = () => async (dispatch) => {
   dispatch(getProducts(response.data.results));
 };
 
+export const getOne = (payload) => async (dispatch) => {
+  const response = await axios.get(
+    `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${payload._id}`
+  );
+
+  dispatch(getOneProduct(response.data));
+};
+
 export const increment = (payload) => async (dispatch) => {
   if (payload.stock > 0) {
     const response = await axios.put(
@@ -79,6 +87,13 @@ const decrementItem = (payload) => {
 const deleteFromCart = (payload) => {
   return {
     type: 'DELETE_FROM_CART',
+    payload,
+  };
+};
+
+const getOneProduct = (payload) => {
+  return {
+    type: 'VIEW_PRODUCT_DETAILS',
     payload,
   };
 };
