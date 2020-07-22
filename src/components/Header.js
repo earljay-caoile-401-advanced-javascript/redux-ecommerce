@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Router, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
 import SimpleCart from './SimpleCart';
