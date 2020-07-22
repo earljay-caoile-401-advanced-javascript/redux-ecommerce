@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, Router, BrowserRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
 import SimpleCart from './SimpleCart';
@@ -153,7 +154,9 @@ function Header(props) {
           {collapseNavList()}
         </SwipeableDrawer>
         <Typography variant="h6" className={classes.title}>
-          Dat Online Store
+          <Link to="/" className="no-style">
+            Dat Online Store
+          </Link>
         </Typography>
         <Button
           color="inherit"

@@ -7,8 +7,9 @@ import Footer from './components/Footer';
 import Categories from './components/Categories';
 import ActiveCategory from './components/ActiveCategory';
 import Products from './components/Products';
+import ProductDetails from './components/ProductDetails';
 import './styles/base.scss';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Router } from 'react-router-dom';
 
 /**
  * main component that holds the 3 main components of the app: Header, ToDo, and Footer
@@ -22,20 +23,18 @@ import { BrowserRouter, Route } from 'react-router-dom';
 function App() {
   return (
     <Provider store={store}>
-      <Header />
       <BrowserRouter>
+        <Header />
         <div id="main-content" className="fade-in">
           <Route path="/" exact>
             <Categories />
             <ActiveCategory />
             <Products />
           </Route>
-          <Route path="/details/:id">
-            <p>Details Page</p>
-          </Route>
+          <Route path="/products/:id" component={ProductDetails} />
         </div>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </Provider>
   );
 }

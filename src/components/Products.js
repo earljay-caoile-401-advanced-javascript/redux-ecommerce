@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardActionArea,
@@ -101,15 +102,11 @@ function Products(props) {
                 >
                   Add to Cart
                 </Button>
-                <Button
-                  size="small"
-                  color="primary"
-                  onClick={() => {
-                    props.getProductDetails(product);
-                  }}
-                >
-                  View Details
-                </Button>
+                <Link to={`/products/${product._id}`} className="no-style">
+                  <Button size="small" color="primary">
+                    View Details
+                  </Button>
+                </Link>
               </CardActions>
             </Card>
           </Grid>

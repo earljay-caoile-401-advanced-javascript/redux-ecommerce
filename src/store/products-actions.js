@@ -8,12 +8,15 @@ export const get = () => async (dispatch) => {
   dispatch(getProducts(response.data.results));
 };
 
-export const getOne = (payload) => async (dispatch) => {
-  const response = await axios.get(
-    `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${payload._id}`
-  );
-
-  dispatch(getOneProduct(response.data));
+export const getOne = (pathname) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `https://cf-js-401-api-server.herokuapp.com/api/v1${pathname}`
+    );
+    dispatch(getOneProduct(response.data));
+  } catch {
+    dispatch(getOneProduct({}));
+  }
 };
 
 export const increment = (payload) => async (dispatch) => {
