@@ -28,11 +28,15 @@ const productReducer = (state = initState, action) => {
       if (payload.stock >= 0) {
         newState.products.set(payload._id, payload);
       }
-      newState.activeProduct = payload;
+      if (newState.activeProduct._id === payload._id) {
+        newState.activeProduct = payload;
+      }
       break;
     case 'DECREMENT_ITEM':
       newState.products.set(payload._id, payload);
-      newState.activeProduct = payload;
+      if (newState.activeProduct._id === payload._id) {
+        newState.activeProduct = payload;
+      }
       break;
     case 'DELETE_FROM_CART':
       prevProd = newState.products.get(payload._id);
@@ -41,7 +45,10 @@ const productReducer = (state = initState, action) => {
         ...prevProd,
         stock: newStock,
       });
-      newState.activeProduct = { ...payload, stock: newStock };
+
+      if (newState.activeProduct._id === payload._id) {
+        newState.activeProduct = { ...payload, stock: newStock };
+      }
       break;
     case 'VIEW_PRODUCT_DETAILS':
       newState.activeProduct = payload;

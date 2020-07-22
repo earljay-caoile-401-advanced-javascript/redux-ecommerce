@@ -64,6 +64,7 @@ describe('reducer', () => {
         cart: new Map(),
         cartCount: 0,
         products: productMap,
+        activeProduct: {},
       },
       {
         type: 'ADD_TO_CART',

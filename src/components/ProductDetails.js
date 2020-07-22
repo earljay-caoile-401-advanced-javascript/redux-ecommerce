@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
 import axios from 'axios';
 import {
@@ -20,7 +21,6 @@ function ProductDetails(props) {
   const [reqIsPending, setReqIsPending] = useState(false);
   const [fetchingGet, setFetchingGet] = useState(false);
   const [foundError, setFoundError] = useState(false);
-  // const [relatedItems, setRelatedItems] = useState([]);
 
   const {
     activeProduct,
@@ -71,18 +71,20 @@ function ProductDetails(props) {
       ) {
         relatedItems.push(
           <Grid item xs={12} sm={6} md={4} key={prod._id}>
-            <CardActionArea
-              style={{
-                padding: '1em 0.5em',
-                textAlign: 'center',
-                background: 'teal',
-                color: 'white',
-              }}
-            >
-              <Typography variant="body1">
-                {prod.displayName || prod.name}
-              </Typography>
-            </CardActionArea>
+            <Link to={`/products/${prod._id}`} className="no-style">
+              <CardActionArea
+                style={{
+                  padding: '1em 0.5em',
+                  textAlign: 'center',
+                  background: 'teal',
+                  color: 'white',
+                }}
+              >
+                <Typography variant="body1">
+                  {prod.displayName || prod.name}
+                </Typography>
+              </CardActionArea>
+            </Link>
           </Grid>
         );
       }
