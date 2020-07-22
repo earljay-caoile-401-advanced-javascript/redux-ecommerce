@@ -1,8 +1,6 @@
-const sampleData = require('../data/db.json');
-
 const initState = {
-  categories: sampleData.categories,
-  currentCategory: sampleData.categories[0],
+  categories: [],
+  currentCategory: '',
 };
 
 /**
@@ -12,8 +10,13 @@ const initState = {
  */
 const categoryReducer = (state = initState, action) => {
   const newState = { ...state };
+  const { type, payload } = action;
 
-  switch (action.type) {
+  switch (type) {
+    case 'GET_CATEGORIES':
+      newState.categories = payload;
+      newState.currentCategory = payload[0];
+      break;
     case 'CHANGE_CATEGORY':
       newState.currentCategory = action.payload;
       break;
@@ -22,13 +25,6 @@ const categoryReducer = (state = initState, action) => {
   }
 
   return newState;
-};
-
-export const changeCategory = (category) => {
-  return {
-    type: 'CHANGE_CATEGORY',
-    payload: category,
-  };
 };
 
 export default categoryReducer;

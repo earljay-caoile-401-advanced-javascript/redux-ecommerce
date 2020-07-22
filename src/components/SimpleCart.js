@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Drawer,
@@ -24,24 +24,34 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ColorizeIcon from '@material-ui/icons/Colorize';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {
-  removeFromCart,
-  incrementItem,
-  decrementItem,
-} from '../store/cartStore';
 import '../styles/simpleCart.scss';
+import * as actions from '../store/products-actions';
+import axios from 'axios';
 
 /**
  * Component that renders a list of cart items. Allows users to increment, decrement, and delete
  * @param {Object} props - props passed on from the Header component
  */
 function SimpleCart(props) {
+  const [reqIsPending, setReqIsPending] = useState(false);
+  const { cart } = props;
+
+  axios.interceptors.response.use(
+    function (response) {
+      setReqIsPending(false);
+      return response;
+    },
+    function (error) {
+      setReqIsPending(false);
+      return Promise.reject(error);
+    }
+  );
+
   const cartListToRender = [];
-  const propCart = props.cart;
 
   let totalCost = 0;
-  if (propCart) {
-    propCart.forEach((value, key) => {
+  if (cart) {
+    cart.forEach((value, key) => {
       let itemIcon;
       switch (value.category) {
         case 'mythical_weapons':
@@ -71,14 +81,18 @@ function SimpleCart(props) {
             secondary={value.quantity}
           />
           <Button
+            disabled={!value.stock || reqIsPending}
             onClick={() => {
+              setReqIsPending(true);
               props.incrementItem(value);
             }}
           >
             <ArrowUpwardIcon className="item-change" />
           </Button>
           <Button
+            disabled={reqIsPending}
             onClick={() => {
+              setReqIsPending(true);
               props.decrementItem(value);
             }}
           >
@@ -87,7 +101,7 @@ function SimpleCart(props) {
           <Button
             color="secondary"
             onClick={() => {
-              props.removeFromCart(value);
+              props.removeItem(value);
             }}
           >
             <DeleteForeverIcon />
@@ -171,10 +185,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  removeFromCart,
-  incrementItem,
-  decrementItem,
-};
+const mapDispatchToProps = (dispatch) => ({
+  incrementItem: (data) => dispatch(actions.increment(data)),
+  decrementItem: (data) => dispatch(actions.decrement(data)),
+  removeItem: (data) => dispatch(actions.remove(data)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

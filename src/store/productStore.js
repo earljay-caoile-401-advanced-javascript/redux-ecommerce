@@ -2,11 +2,8 @@
  * Yes, I'm a madman and I put the products into a map instead of using an array.
  * I couldn't resist O(1) lookup
  */
-const sampleData = require('../data/db.json');
-const productMap = new Map(sampleData.products.map((prod) => [prod._id, prod]));
-
 const initState = {
-  products: productMap,
+  products: new Map(),
 };
 
 /**
@@ -17,33 +14,32 @@ const initState = {
  * @param {Object} action - object containing information to update product state
  */
 const productReducer = (state = initState, action) => {
+  const { type, payload } = action;
   const newState = { ...state };
   let prevProd;
 
-  switch (action.type) {
+  switch (type) {
+    case 'GET_PRODUCTS':
+      newState.products = new Map(payload.map((obj) => [obj._id, obj]));
+      break;
     case 'ADD_TO_CART':
     case 'INCREMENT_ITEM':
-      if (action.payload.stock) {
-        prevProd = newState.products.get(action.payload._id);
-        newState.products.set(action.payload._id, {
-          ...prevProd,
-          stock: prevProd.stock - 1,
-        });
+      if (payload.stock >= 0) {
+        newState.products.set(payload._id, payload);
       }
       break;
     case 'DECREMENT_ITEM':
-      prevProd = newState.products.get(action.payload._id);
-      newState.products.set(action.payload._id, {
-        ...prevProd,
-        stock: prevProd.stock + 1,
-      });
+      newState.products.set(payload._id, payload);
       break;
     case 'DELETE_FROM_CART':
-      prevProd = newState.products.get(action.payload._id);
-      newState.products.set(action.payload._id, {
+      prevProd = newState.products.get(payload._id);
+      newState.products.set(payload._id, {
         ...prevProd,
-        stock: prevProd.stock + action.payload.quantity,
+        stock: prevProd.stock + payload.quantity,
       });
+      break;
+    case 'DEBUG_RESTOCK':
+      newState.products = payload;
       break;
     default:
       break;

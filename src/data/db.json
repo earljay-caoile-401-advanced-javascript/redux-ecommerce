@@ -1,28 +1,28 @@
 {
   "categories": [
     {
-      "_id": "5e810625ed0676292430be68",
+      "_id": "5f1236475c76250017b1e07c",
       "name": "mythical_weapons",
       "displayName": "Mythical Weapons",
       "description": "I shall smite thee! There is only one item of each available.",
       "__v": 0
     },
     {
-      "_id": "5e81063bed0676292430be69",
+      "_id": "5f1236515c76250017b1e07d",
       "name": "health_house_baby",
       "displayName": "Health, Household, and Baby Care",
       "description": "Stuff fo yo crib! Test out adding an item with only two in stock.",
       "__v": 0
     },
     {
-      "_id": "5e810645ed0676292430be6a",
+      "_id": "5f12365d5c76250017b1e07e",
       "name": "electronics",
       "displayName": "Electronics",
       "description": "Beep boop bzzt! Testing more than 4 items to see scaling at different widths.",
       "__v": 0
     },
     {
-      "_id": "5e810645ed0676292430be6b",
+      "_id": "5f12366c5c76250017b1e07f",
       "name": "food",
       "displayName": "Food",
       "description": "Nom nom nom! Two items and decimals.",
@@ -31,49 +31,54 @@
   ],
   "products": [
     {
-      "_id": "42c2d476-3349-415e-994b-edf534b8aa4c",
+      "_id": "5f1233cd5c76250017b1e071",
       "name": "tv",
       "displayName": "TV",
       "description": "See all the things",
       "stock": 5,
       "price": 400,
-      "category": "electronics"
+      "category": "electronics",
+      "__v": 0
     },
     {
-      "_id": "11a4bc6e-30c6-4e2b-b30b-bf285af0528d",
+      "_id": "5f1233da5c76250017b1e072",
       "name": "macbook",
       "displayName": "Macbook",
       "description": "Do all the things",
       "stock": 7,
       "price": 1200,
-      "category": "electronics"
+      "category": "electronics",
+      "__v": 0
     },
     {
-      "_id": "82bfbccf-7a7e-46d4-a037-d7e33125e906",
+      "_id": "5f1233eb5c76250017b1e073",
       "category": "food",
       "name": "carrot",
       "displayName": "Carrot",
       "description": "Crunch all the things",
       "stock": 25,
-      "price": 0.3
+      "price": 0.3,
+      "__v": 0
     },
     {
-      "_id": "6a64f6a4-f233-4f32-955c-0d6d5b0786e1",
+      "_id": "5f1233fc5c76250017b1e074",
       "category": "food",
       "name": "cake",
       "displayName": "Cake",
       "description": "Lie all the things",
       "stock": 10,
-      "price": 5
+      "price": 5.55,
+      "__v": 0
     },
     {
-      "_id": "204a3d62-fc02-4bdd-a3bd-feb6bd12dc2d",
+      "_id": "5f1234105c76250017b1e075",
       "category": "mythical_weapons",
       "name": "divine_rapier",
       "displayName": "Divine Rapier",
       "description": "So powerful, it cannot have a single owner.",
       "stock": 1,
-      "price": 6000
+      "price": 6000,
+      "__v": 0
     },
     {
       "_id": "5e87f12c22443353e4300820",
@@ -82,52 +87,58 @@
       "displayName": "Mjolnir",
       "description": "Thor's magical hammer, made for him by the dwarves Brok and Eitri.",
       "stock": 1,
-      "price": 5600
+      "price": 5600,
+      "__v": 0
     },
     {
-      "_id": "5e87f1a822443353e4300821",
+      "_id": "5f1234335c76250017b1e077",
       "category": "mythical_weapons",
       "name": "gungnir",
       "displayName": "Gungnir",
       "stock": 1,
       "price": 5555,
-      "description": "Odin's spear. It supposedly doesn't miss..."
+      "description": "Odin's spear. It supposedly doesn't miss...",
+      "__v": 0
     },
     {
-      "_id": "5e8bc1f57dffb9a79147e82b",
+      "_id": "5f12344f5c76250017b1e078",
       "category": "health_house_baby",
       "name": "adhesive_medical_strips",
       "displayName": "Adhesive Medical Strips",
       "description": "We can't use band-aid since that's a copyrighted company name, but that's pretty much what it is...",
       "stock": 2,
-      "price": 1
+      "price": 1,
+      "__v": 0
     },
     {
-      "_id": "5e8bc1fed6d43bae52531d4b",
+      "_id": "5f12345b5c76250017b1e079",
       "category": "electronics",
       "name": "amd_ryzen_9_3950x",
       "displayName": "AMD Ryzen 9 3950X",
       "description": "16 cores, 32 threads, dank level over 9000!",
       "stock": 420,
-      "price": 750
+      "price": 750,
+      "__v": 0
     },
     {
-      "_id": "5e8bc267b2411d8502b69117",
+      "_id": "5f12346a5c76250017b1e07a",
       "category": "electronics",
       "name": "intel_core_i9_9900k",
       "displayName": "Intel Core i9-9900k",
       "description": "That's a funny way to spell 'Shintel'!",
       "stock": 50,
-      "price": 500
+      "price": 500,
+      "__v": 0
     },
     {
-      "_id": "5e8bc2765355fe493ac01ade",
+      "_id": "5f1234755c76250017b1e07b",
       "category": "electronics",
       "name": "sennheiser_hd_650",
       "displayName": "Sennheiser HD 650",
       "description": "open cans for dat muzak",
       "stock": 420,
-      "price": 300
+      "price": 300,
+      "__v": 0
     }
   ]
 }
