@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../store/products-actions';
 import {
   Container,
   // Card,
@@ -30,10 +29,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(actions.get()),
-  getProductDetails: (data) => dispatch(actions.getOne(data)),
-  addToCart: (data) => dispatch(actions.increment(data)),
-  restock: () => dispatch(actions.restock()),
+  // getProducts: () => dispatch(actions.get()),
+  // getProductDetails: (data) => dispatch(actions.getOne(data)),
+  // addToCart: (data) => dispatch(actions.increment(data)),
+  // restock: () => dispatch(actions.restock()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
