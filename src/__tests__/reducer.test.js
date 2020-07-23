@@ -1,8 +1,11 @@
 'use strict';
 
-import categoryReducer from '../store/categoryStore';
-import cartReducer from '../store/cartStore';
-import productReducer from '../store/productStore';
+// import categoryReducer from '../store/categoryStore';
+// import cartReducer from '../store/cartStore';
+// import productReducer from '../store/productStore';
+import categoryReducer from '../store/category-slice.js';
+import cartReducer from '../store/cart-slice.js';
+import productReducer from '../store/product-slice.js';
 const sampleData = require('../data/db.json');
 
 describe('reducer', () => {

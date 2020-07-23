@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getAll, increment, restock } from '../store/product-slice.js';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -11,7 +12,6 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-import * as actions from '../store/products-actions';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
 import sampleData from '../data/db.json';
@@ -28,7 +28,7 @@ const lastProd = sampleData.products[sampleData.products.length - 1];
  * )
  */
 function Products(props) {
-  const { getProducts, products, currentCategory } = props;
+  const { products, currentCategory, getAll, increment, restock } = props;
   const [reqIsPending, setReqIsPending] = useState(false);
   const [fetchingGet, setFetchingGet] = useState(false);
 
@@ -55,8 +55,8 @@ function Products(props) {
 
   useEffect(() => {
     setFetchingGet(true);
-    getProducts();
-  }, [getProducts]);
+    getAll();
+  }, []);
 
   const prodsToRender = [];
 
@@ -97,7 +97,7 @@ function Products(props) {
                   disabled={!product.stock || reqIsPending}
                   onClick={() => {
                     setReqIsPending(true);
-                    props.addToCart(product);
+                    increment(product);
                   }}
                 >
                   Add to Cart
@@ -132,7 +132,7 @@ function Products(props) {
             style={{ margin: '10em auto' }}
             onClick={() => {
               setFetchingGet(true);
-              props.restock();
+              restock();
             }}
           >
             Debug Button: Restock Inventory and Clear Cart
@@ -152,11 +152,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(actions.get()),
-  getProductDetails: (data) => dispatch(actions.getOne(data)),
-  addToCart: (data) => dispatch(actions.increment(data)),
-  restock: () => dispatch(actions.restock()),
-});
-
+const mapDispatchToProps = {
+  getAll,
+  increment,
+  restock,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

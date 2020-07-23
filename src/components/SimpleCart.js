@@ -22,7 +22,9 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../styles/simpleCart.scss';
-import * as actions from '../store/products-actions';
+// import * as actions from '../store/products-actions';
+import { increment, decrement, remove } from '../store/product-slice.js';
+
 import axios from 'axios';
 
 /**
@@ -31,7 +33,7 @@ import axios from 'axios';
  */
 function SimpleCart(props) {
   const [reqIsPending, setReqIsPending] = useState(false);
-  const { cart } = props;
+  const { cart, increment, decrement, remove } = props;
 
   axios.interceptors.response.use(
     function (response) {
@@ -81,7 +83,7 @@ function SimpleCart(props) {
             disabled={!value.stock || reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              props.incrementItem(value);
+              increment(value);
             }}
           >
             <ArrowUpwardIcon className="item-change" />
@@ -90,7 +92,7 @@ function SimpleCart(props) {
             disabled={reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              props.decrementItem(value);
+              decrement(value);
             }}
           >
             <ArrowDownwardIcon className="item-change" />
@@ -98,7 +100,7 @@ function SimpleCart(props) {
           <Button
             color="secondary"
             onClick={() => {
-              props.removeItem(value);
+              remove(value);
             }}
           >
             <DeleteForeverIcon />
@@ -182,10 +184,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  incrementItem: (data) => dispatch(actions.increment(data)),
-  decrementItem: (data) => dispatch(actions.decrement(data)),
-  removeItem: (data) => dispatch(actions.remove(data)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   incrementItem: (data) => dispatch(actions.increment(data)),
+//   decrementItem: (data) => dispatch(actions.decrement(data)),
+//   removeItem: (data) => dispatch(actions.remove(data)),
+// });
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  remove,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

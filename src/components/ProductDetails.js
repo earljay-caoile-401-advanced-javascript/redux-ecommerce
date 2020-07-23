@@ -13,7 +13,9 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-import * as actions from '../store/products-actions';
+// import * as actions from '../store/products-actions';
+import { getAll, getOne, increment, restock } from '../store/product-slice.js';
+
 import '../styles/prodDetails.scss';
 
 function ProductDetails(props) {
@@ -21,7 +23,7 @@ function ProductDetails(props) {
   const [fetchingGet, setFetchingGet] = useState(false);
   const [foundError, setFoundError] = useState(false);
 
-  const { activeProduct, getProducts, getProductDetails, products } = props;
+  const { activeProduct, getAll, getOne, increment, products } = props;
   const prodID = props.match.params.id;
 
   axios.interceptors.response.use(
@@ -41,18 +43,18 @@ function ProductDetails(props) {
 
   useEffect(() => {
     if (!products || !products.size) {
-      getProducts();
+      getAll();
     }
 
     setFetchingGet(true);
-    getProductDetails(prodID);
+    getOne(prodID);
 
     return () => {
       setReqIsPending(false);
       setFetchingGet(false);
       setFoundError(false);
     };
-  }, [getProducts, products, getProductDetails, prodID]);
+  }, [products, prodID]);
 
   const relatedItems = [];
 
@@ -135,7 +137,7 @@ function ProductDetails(props) {
             disabled={!activeProduct.stock || reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              props.addToCart(activeProduct);
+              increment(activeProduct);
             }}
           >
             Add to Cart
@@ -169,10 +171,17 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(actions.get()),
-  getProductDetails: (data) => dispatch(actions.getOne(data)),
-  addToCart: (data) => dispatch(actions.increment(data)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   getProducts: () => dispatch(actions.get()),
+//   getProductDetails: (data) => dispatch(actions.getOne(data)),
+//   addToCart: (data) => dispatch(actions.increment(data)),
+// });
+
+const mapDispatchToProps = {
+  getAll,
+  getOne,
+  increment,
+  restock,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
