@@ -8,10 +8,10 @@ export const get = () => async (dispatch) => {
   dispatch(getProducts(response.data.results));
 };
 
-export const getOne = (pathname) => async (dispatch) => {
+export const getOne = (id) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `https://cf-js-401-api-server.herokuapp.com/api/v1${pathname}`
+      `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${id}`
     );
     dispatch(getOneProduct(response.data));
   } catch {

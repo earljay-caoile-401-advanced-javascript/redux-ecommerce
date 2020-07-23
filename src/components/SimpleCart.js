@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Drawer,
-  IconButton,
   Typography,
   Divider,
   List,
@@ -12,8 +11,6 @@ import {
   Button,
   Grid,
 } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CakeIcon from '@material-ui/icons/Cake';
 import DevicesIcon from '@material-ui/icons/Devices';
@@ -125,13 +122,13 @@ function SimpleCart(props) {
       }}
     >
       <div className={props.classes.drawerHeader} id="cart-list-header">
-        <IconButton onClick={() => props.setOpenRight(false)}>
+        {/* <IconButton onClick={() => props.setOpenRight(false)}>
           {props.theme.direction === 'rtl' ? (
             <ChevronLeftIcon />
           ) : (
             <ChevronRightIcon />
           )}
-        </IconButton>
+        </IconButton> */}
         <Grid
           container
           direction="row"

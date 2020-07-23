@@ -21,13 +21,8 @@ function ProductDetails(props) {
   const [fetchingGet, setFetchingGet] = useState(false);
   const [foundError, setFoundError] = useState(false);
 
-  const {
-    activeProduct,
-    location,
-    getProducts,
-    getProductDetails,
-    products,
-  } = props;
+  const { activeProduct, getProducts, getProductDetails, products } = props;
+  const prodID = props.match.params.id;
 
   axios.interceptors.response.use(
     function (response) {
@@ -49,15 +44,15 @@ function ProductDetails(props) {
       getProducts();
     }
 
-    getProductDetails(location.pathname);
     setFetchingGet(true);
+    getProductDetails(prodID);
 
     return () => {
       setReqIsPending(false);
       setFetchingGet(false);
       setFoundError(false);
     };
-  }, [getProducts, products, getProductDetails, location.pathname]);
+  }, [getProducts, products, getProductDetails, prodID]);
 
   const relatedItems = [];
 

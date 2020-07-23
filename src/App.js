@@ -8,6 +8,8 @@ import Categories from './components/Categories';
 import ActiveCategory from './components/ActiveCategory';
 import Products from './components/Products';
 import ProductDetails from './components/ProductDetails';
+import Cart from './components/Cart';
+
 import './styles/base.scss';
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -32,6 +34,7 @@ function App() {
             <Products />
           </Route>
           <Route path="/products/:id" component={ProductDetails} />
+          <Route path="/cart" component={Cart} />
         </div>
         <Footer />
       </BrowserRouter>

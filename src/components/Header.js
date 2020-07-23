@@ -17,6 +17,8 @@ import {
   Divider,
   SwipeableDrawer,
 } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -158,11 +160,21 @@ function Header(props) {
             Dat Online Store
           </Link>
         </Typography>
-        <Button
-          color="inherit"
-          id="nav-cart"
-          onClick={() => setOpenRight(!openRight)}
-        >{`Cart (${props.cartCount})`}</Button>
+        <div id="nav-cart">
+          <Link to="/cart" className="no-style">
+            <Button
+              color="inherit"
+              id="nav-cart"
+            >{`Cart (${props.cartCount})`}</Button>
+          </Link>
+          <IconButton onClick={() => setOpenRight(!openRight)}>
+            {openRight ? (
+              <ChevronRightIcon style={{ color: 'white' }} />
+            ) : (
+              <ChevronLeftIcon style={{ color: 'white' }} />
+            )}
+          </IconButton>
+        </div>
       </Toolbar>
       <SimpleCart
         theme={theme}
