@@ -9,6 +9,7 @@ import '../styles/spinner.scss';
  * @return  {object}  JSX content to be rendered
  */
 function LoadingSpinner(props) {
+  console.log('did this trigger?', props.loading);
   return props.loading ? (
     <div className="loading">
       <FontAwesomeIcon

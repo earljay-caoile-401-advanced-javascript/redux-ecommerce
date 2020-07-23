@@ -54,11 +54,8 @@ function Products(props) {
   );
 
   useEffect(() => {
-    if (!products || !products.size) {
-      getProducts();
-    }
-
     setFetchingGet(true);
+    getProducts();
   }, [getProducts]);
 
   const prodsToRender = [];

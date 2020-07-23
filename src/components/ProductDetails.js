@@ -7,7 +7,6 @@ import {
   Container,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   Button,
@@ -46,20 +45,19 @@ function ProductDetails(props) {
   );
 
   useEffect(() => {
-    setFetchingGet(true);
-
     if (!products || !products.size) {
       getProducts();
     }
 
     getProductDetails(location.pathname);
+    setFetchingGet(true);
 
     return () => {
       setReqIsPending(false);
       setFetchingGet(false);
       setFoundError(false);
     };
-  }, [getProductDetails, location.pathname]);
+  }, [getProducts, products, getProductDetails, location.pathname]);
 
   const relatedItems = [];
 
@@ -96,7 +94,7 @@ function ProductDetails(props) {
   }
 
   return fetchingGet ? (
-    <LoadingSpinner loading={reqIsPending} />
+    <LoadingSpinner loading={fetchingGet} />
   ) : foundError ? (
     <h1>Error</h1>
   ) : (
