@@ -9,7 +9,7 @@ const cartSlice = createSlice({
   },
 
   reducers: {
-    incrementItem: (state, action) => {
+    cartIncrement: (state, action) => {
       const { payload } = action;
       const prevCartObj = state.cart.get(payload._id);
       state.cart.set(payload._id, {
@@ -19,7 +19,7 @@ const cartSlice = createSlice({
       });
       state.cartCount++;
     },
-    decrementItem: (state, action) => {
+    cartDecrement: (state, action) => {
       const { payload } = action;
       const prevCartObj = state.cart.get(payload._id);
       if (prevCartObj.quantity === 1) {
@@ -33,12 +33,12 @@ const cartSlice = createSlice({
       }
       state.cartCount--;
     },
-    deleteFromCart: (state, action) => {
+    cartDelete: (state, action) => {
       const { payload } = action;
       state.cartCount -= payload.quantity;
       state.cart.delete(payload._id);
     },
-    debugRestock: (state, action) => {
+    cartRestock: (state, action) => {
       state.cart = new Map();
       state.cartCount = 0;
     },
@@ -46,11 +46,10 @@ const cartSlice = createSlice({
 });
 
 export const {
-  getProducts,
-  incrementItem,
-  decrementItem,
-  deleteFromCart,
-  debugRestock,
+  cartIncrement,
+  cartDecrement,
+  cartDelete,
+  cartRestock,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

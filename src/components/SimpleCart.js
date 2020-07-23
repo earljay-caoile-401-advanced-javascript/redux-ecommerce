@@ -124,13 +124,6 @@ function SimpleCart(props) {
       }}
     >
       <div className={props.classes.drawerHeader} id="cart-list-header">
-        {/* <IconButton onClick={() => props.setOpenRight(false)}>
-          {props.theme.direction === 'rtl' ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton> */}
         <Grid
           container
           direction="row"

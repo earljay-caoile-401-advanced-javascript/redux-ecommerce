@@ -13,7 +13,6 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-// import * as actions from '../store/products-actions';
 import { getAll, getOne, increment, restock } from '../store/product-slice.js';
 
 import '../styles/prodDetails.scss';
@@ -54,7 +53,7 @@ function ProductDetails(props) {
       setFetchingGet(false);
       setFoundError(false);
     };
-  }, [products, prodID]);
+  }, [prodID, products, getAll, getOne]);
 
   const relatedItems = [];
 
@@ -170,12 +169,6 @@ const mapStateToProps = (state) => {
     cartCount: state.cartStore.cartCount,
   };
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   getProducts: () => dispatch(actions.get()),
-//   getProductDetails: (data) => dispatch(actions.getOne(data)),
-//   addToCart: (data) => dispatch(actions.increment(data)),
-// });
 
 const mapDispatchToProps = {
   getAll,

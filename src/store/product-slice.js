@@ -1,8 +1,14 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  cartIncrement,
+  cartDecrement,
+  cartDelete,
+  cartRestock,
+} from '../store/cart-slice.js';
 
 const productSlice = createSlice({
-  name: 'productsStore',
+  name: 'productStore',
 
   initialState: {
     products: new Map(),
@@ -87,6 +93,7 @@ export const increment = (payload) => async (dispatch) => {
       { ...payload, stock: payload.stock - 1 }
     );
     dispatch(incrementItem(response.data));
+    dispatch(cartIncrement(response.data));
   }
 };
 
@@ -96,6 +103,7 @@ export const decrement = (payload) => async (dispatch) => {
     { ...payload, stock: payload.stock + 1 }
   );
   dispatch(decrementItem(response.data));
+  dispatch(cartDecrement(response.data));
 };
 
 export const remove = (payload) => async (dispatch) => {
@@ -103,7 +111,9 @@ export const remove = (payload) => async (dispatch) => {
     `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${payload._id}`,
     { ...payload, stock: payload.stock + payload.quantity }
   );
-  dispatch(deleteFromCart({ ...response.data, quantity: payload.quantity }));
+  const newPayload = { ...response.data, quantity: payload.quantity };
+  dispatch(deleteFromCart(newPayload));
+  dispatch(cartDelete(newPayload));
 };
 
 export const restock = () => async (dispatch) => {
@@ -125,6 +135,7 @@ export const restock = () => async (dispatch) => {
   }
 
   dispatch(debugRestock(resProds));
+  dispatch(cartRestock());
 };
 
 export default productSlice.reducer;

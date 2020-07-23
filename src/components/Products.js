@@ -56,7 +56,7 @@ function Products(props) {
   useEffect(() => {
     setFetchingGet(true);
     getAll();
-  }, []);
+  }, [getAll]);
 
   const prodsToRender = [];
 

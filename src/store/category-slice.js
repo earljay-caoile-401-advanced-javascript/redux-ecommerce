@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const categorySlice = createSlice({
-  name: 'categoriesStore',
+  name: 'categoryStore',
 
   initialState: {
     categories: [],
