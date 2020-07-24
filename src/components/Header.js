@@ -17,6 +17,7 @@ import {
   Divider,
   SwipeableDrawer,
 } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -109,12 +110,22 @@ function Header(props) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button key={'cart'} onClick={() => setOpenRight(true)}>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary={`Cart: (${props.cartCount})`} />
-        </ListItem>
+        <Link to="/" className="no-style">
+          <ListItem button key={'home'}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary={`Home`} />
+          </ListItem>
+        </Link>
+        <Link to="/cart" className="no-style">
+          <ListItem button key={'cart'}>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary={`Cart: (${props.cartCount})`} />
+          </ListItem>
+        </Link>
       </List>
       <Divider />
       <List>

@@ -50,9 +50,9 @@ function SimpleCart(props) {
 
   let totalCost = 0;
   if (cart) {
-    cart.forEach((value, key) => {
+    cart.forEach((item, key) => {
       let itemIcon;
-      switch (value.category) {
+      switch (item.category) {
         case 'mythical_weapons':
           itemIcon = <ColorizeIcon />;
           break;
@@ -70,20 +70,20 @@ function SimpleCart(props) {
           break;
       }
 
-      totalCost += value.price * value.quantity;
+      totalCost += item.price * item.quantity;
 
       cartListToRender.push(
         <ListItem key={key} className="fade-in">
           <ListItemIcon>{itemIcon}</ListItemIcon>
           <ListItemText
-            primary={value.displayName || value.name}
-            secondary={value.quantity}
+            primary={item.displayName || item.name}
+            secondary={item.quantity}
           />
           <Button
-            disabled={!value.stock || reqIsPending}
+            disabled={!item.stock || reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              increment(value);
+              increment(item);
             }}
           >
             <ArrowUpwardIcon className="item-change" />
@@ -92,7 +92,7 @@ function SimpleCart(props) {
             disabled={reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              decrement(value);
+              decrement(item);
             }}
           >
             <ArrowDownwardIcon className="item-change" />
@@ -100,7 +100,7 @@ function SimpleCart(props) {
           <Button
             color="secondary"
             onClick={() => {
-              remove(value);
+              remove(item);
             }}
           >
             <DeleteForeverIcon />
@@ -158,7 +158,7 @@ function SimpleCart(props) {
               variant="contained"
               color="primary"
               onClick={() => props.setOpenRight(false)}
-              id="back-to-shopping-btn"
+              className="back-to-shopping-btn"
             >
               <ArrowBackIcon />
               <Typography variant="h6">Return to Shopping</Typography>

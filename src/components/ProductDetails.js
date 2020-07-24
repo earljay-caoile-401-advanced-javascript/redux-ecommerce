@@ -114,6 +114,7 @@ function ProductDetails(props) {
                   activeProduct.displayName || activeProduct.name
                 }`}
                 height="600"
+                style={{ padding: '1em', width: '98%' }}
                 image={require(`../assets/${activeProduct.name}.jpg`)}
                 title={activeProduct.displayName || activeProduct.name}
               />
