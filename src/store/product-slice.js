@@ -6,6 +6,8 @@ import {
   cartDelete,
   cartRestock,
 } from '../store/cart-slice.js';
+import { enableMapSet } from 'immer';
+enableMapSet();
 
 const productSlice = createSlice({
   name: 'productStore',
