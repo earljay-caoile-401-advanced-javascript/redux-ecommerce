@@ -115,7 +115,7 @@ function Header(props) {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary={`Home`} />
+            <ListItemText primary={`Home`} style={{ color: 'gray' }} />
           </ListItem>
         </Link>
         <Link to="/cart" className="no-style">
@@ -123,7 +123,10 @@ function Header(props) {
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary={`Cart: (${props.cartCount})`} />
+            <ListItemText
+              primary={`Cart (${props.cartCount})`}
+              style={{ color: 'gray' }}
+            />
           </ListItem>
         </Link>
       </List>

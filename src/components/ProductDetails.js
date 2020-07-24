@@ -12,10 +12,12 @@ import {
   Button,
   Typography,
   Grid,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { getAll, getOne, increment, restock } from '../store/product-slice.js';
-
-import '../styles/prodDetails.scss';
 
 /**
  * Component that serves the enter route for /products/:id. Displays items details and shows related
@@ -172,6 +174,43 @@ function ProductDetails(props) {
             </Grid>
           </Grid>
         ) : null}
+        <Grid item>
+          <Typography variant="h6" style={{ margin: '1em auto' }}>
+            Product Details
+          </Typography>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Specifications</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                eget.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography>User Reviews</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                eget.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
       </Grid>
     </Container>
   ) : null;
