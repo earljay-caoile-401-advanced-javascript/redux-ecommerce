@@ -14,7 +14,7 @@ import './styles/base.scss';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 /**
- * main component that holds the 3 main components of the app: Header, ToDo, and Footer
+ * main component that holds the 3 main components of the app: Header, main content (differs on route), and footer
  *
  * @component
  * @example

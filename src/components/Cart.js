@@ -68,6 +68,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Component that serves the enter route for /cart. Displays all the cart details and mocks
+ * out shipping and payment info and a place order button. Connects to the store in order to
+ * retrieve cart state
+ *
+ * @component
+ * @example
+ * return (
+ *   <Cart />
+ * )
+ */
 function Cart(props) {
   const classes = useStyles();
   const { cart } = props;
@@ -152,7 +163,7 @@ function Cart(props) {
             </Grid>
           </Grid>
           <Grid container justify="flex-end" style={{ margin: '2em auto 1em' }}>
-            <Button variant="contained">
+            <Button variant="contained" color="primary">
               <Typography variant="h6">Place Your Order</Typography>
             </Button>
           </Grid>

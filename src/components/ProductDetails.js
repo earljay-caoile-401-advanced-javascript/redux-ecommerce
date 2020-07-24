@@ -17,6 +17,16 @@ import { getAll, getOne, increment, restock } from '../store/product-slice.js';
 
 import '../styles/prodDetails.scss';
 
+/**
+ * Component that serves the enter route for /products/:id. Displays items details and shows related
+ * items. Connects to the store in order to retrieve product and cart state
+ *
+ * @component
+ * @example
+ * return (
+ *   <ProductDetails />
+ * )
+ */
 function ProductDetails(props) {
   const [reqIsPending, setReqIsPending] = useState(false);
   const [fetchingGet, setFetchingGet] = useState(false);

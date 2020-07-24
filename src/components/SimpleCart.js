@@ -22,14 +22,18 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../styles/simpleCart.scss';
-// import * as actions from '../store/products-actions';
 import { increment, decrement, remove } from '../store/product-slice.js';
 
 import axios from 'axios';
 
 /**
- * Component that renders a list of cart items. Allows users to increment, decrement, and delete
- * @param {Object} props - props passed on from the Header component
+ * Component that renders a list of cart items. Allows users to increment, decrement, and delete.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SimpleCart />
+ * )
  */
 function SimpleCart(props) {
   const [reqIsPending, setReqIsPending] = useState(false);

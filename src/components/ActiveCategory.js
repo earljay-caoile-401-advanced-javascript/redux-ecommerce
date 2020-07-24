@@ -14,7 +14,6 @@ import '../styles/categories.scss';
  * )
  */
 function ActiveCategory(props) {
-  // console.log('props?', props);
   const { currentCategory } = props;
   return currentCategory ? (
     <div id="active-category">

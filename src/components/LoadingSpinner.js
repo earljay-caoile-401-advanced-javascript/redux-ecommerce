@@ -4,9 +4,14 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import '../styles/spinner.scss';
 
 /**
- * component that displays while an API fetch function is taking place
- * uses Font Awesome to display the magic
- * @return  {object}  JSX content to be rendered
+ * component that displays while an API fetch function is taking place. Uses Font Awesome to display
+ * the magic. Relies on a loading boolean to render.
+ *
+ * @component
+ * @example
+ * return (
+ *   <LoadingSpinner loading={fetchingGet}/>
+ * )
  */
 function LoadingSpinner(props) {
   return props.loading ? (

@@ -18,8 +18,8 @@ import sampleData from '../data/db.json';
 const lastProd = sampleData.products[sampleData.products.length - 1];
 
 /**
- * Component that renders the list of products as cards
- * Grabs the products and currentCategory states from the Redux store to map state to props.
+ * Component that renders the list of products as cards. Grabs the products and currentCategory
+ * states from the Redux store to map state to props.
  *
  * @component
  * @example
