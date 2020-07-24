@@ -183,7 +183,7 @@ function Cart(props) {
             <CardMedia
               component="img"
               alt={`out of stock image`}
-              image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg?w=1000&h=600&crop=1"
+              image={require('../assets/spongebob.gif')}
               title="empty stock image"
               style={{ margin: '2em auto' }}
             />
