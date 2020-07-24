@@ -1,6 +1,6 @@
-# Lab 32: Lab: Redux - Additional Topics
+# Lab 33: Redux - Additional Topics
 
-## E-Commerce Store with Material UI, Reducer Refactor, and Async with an API
+## E-Commerce Store with Material UI, Reducer Refactor, Async with an API, and Redux Toolkit Refactor
 
 Labs 29, 31, 32, and 33 for CF JS 401 Nights
 
@@ -42,10 +42,14 @@ Labs 29, 31, 32, and 33 for CF JS 401 Nights
 - select different categories and watch the list of products change
 - stop at one category and click "add item to cart"
 - notice the number on the top right increment by one
-- click the top right section of the header with the cart and number next to it and watch simple cart component
-  pop out
+- on one of the products, click view details to see that product's info along with related items
+- add item or click other items to view their details
+- click the top right corner of the header with the arrow face right
 - increment, decrement, and delete items as much as you'd like
 - watch the numbers change after each of your actions
+- click the arrow again to close the simple cart
+- click the text next to the arrow with the words "cart" plus the cart count
+- look at the cart page and compare it to the contents seen in the simple cart
 - smile
 
 ### UML
