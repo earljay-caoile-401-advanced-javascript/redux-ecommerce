@@ -124,7 +124,8 @@ export const restock = () => async (dispatch) => {
       `https://cf-js-401-api-server.herokuapp.com/api/v1/products/${product._id}`,
       {
         category: product.category,
-        name: product.displayName,
+        name: product.name,
+        displayName: product.displayName,
         description: product.description,
         stock: product.stock,
         price: product.price,

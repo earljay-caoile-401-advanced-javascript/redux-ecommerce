@@ -95,11 +95,13 @@ function ProductDetails(props) {
     <LoadingSpinner loading={fetchingGet} />
   ) : foundError ? (
     <h1>Error</h1>
-  ) : (
+  ) : activeProduct && activeProduct.name ? (
     <Container>
       <Grid container spacing={4} direction="column" justify="space-between">
         <Grid item style={{ textAlign: 'center' }}>
-          <Typography variant="h3">{activeProduct.name}</Typography>
+          <Typography variant="h3">
+            {activeProduct.displayName || activeProduct.name}
+          </Typography>
           <br />
           <Typography variant="h6">{activeProduct.description}</Typography>
         </Grid>
@@ -111,8 +113,8 @@ function ProductDetails(props) {
                 alt={`Image of ${
                   activeProduct.displayName || activeProduct.name
                 }`}
-                height="500"
-                image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg"
+                height="600"
+                image={require(`../assets/${activeProduct.name}.jpg`)}
                 title={activeProduct.displayName || activeProduct.name}
               />
               <CardContent>
@@ -161,7 +163,7 @@ function ProductDetails(props) {
         ) : null}
       </Grid>
     </Container>
-  );
+  ) : null;
 }
 
 const mapStateToProps = (state) => {

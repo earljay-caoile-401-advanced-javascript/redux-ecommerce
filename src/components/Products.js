@@ -70,8 +70,8 @@ function Products(props) {
                 <CardMedia
                   component="img"
                   alt={`Image of ${product.displayName || product.name}`}
-                  height="140"
-                  image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg?w=1000&h=600&crop=1"
+                  height="200"
+                  image={require(`../assets/${product.name}.jpg`)}
                   title={product.displayName || product.name}
                 />
                 <CardContent>

@@ -16,10 +16,14 @@ import '../styles/categories.scss';
 function ActiveCategory(props) {
   // console.log('props?', props);
   const { currentCategory } = props;
-  return currentCategory && Object.keys(currentCategory).length ? (
+  return currentCategory ? (
     <div id="active-category">
       <Typography variant="h3">
-        {(currentCategory.displayName || currentCategory.name).toUpperCase()}
+        {(
+          currentCategory.displayName ||
+          currentCategory.name ||
+          ''
+        ).toUpperCase()}
       </Typography>
       <Typography variant="subtitle1">{currentCategory.description}</Typography>
     </div>
