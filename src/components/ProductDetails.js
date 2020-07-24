@@ -45,7 +45,6 @@ function ProductDetails(props) {
       getAll();
     }
 
-    setFetchingGet(true);
     getOne(prodID);
 
     return () => {
@@ -55,6 +54,9 @@ function ProductDetails(props) {
     };
   }, [prodID, products, getAll, getOne]);
 
+  useEffect(() => {
+    setFetchingGet(true);
+  }, [getAll, getOne]);
   const relatedItems = [];
 
   if (products) {

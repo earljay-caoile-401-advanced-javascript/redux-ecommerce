@@ -6,7 +6,7 @@ const categorySlice = createSlice({
 
   initialState: {
     categories: [],
-    currentCategory: '',
+    currentCategory: null,
   },
 
   reducers: {

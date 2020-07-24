@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { enableMapSet } from 'immer';
+enableMapSet();
 
 const cartSlice = createSlice({
   name: 'cartStore',

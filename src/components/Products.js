@@ -60,7 +60,7 @@ function Products(props) {
 
   const prodsToRender = [];
 
-  if (products) {
+  if (products && currentCategory) {
     products.forEach((product, i) => {
       if (product.category === currentCategory.name) {
         prodsToRender.push(
