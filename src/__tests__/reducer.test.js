@@ -1,8 +1,5 @@
 'use strict';
 
-// import categoryReducer from '../store/categoryStore';
-// import cartReducer from '../store/cartStore';
-// import productReducer from '../store/productStore';
 import categoryReducer, {
   getCategories,
   changeCategory,
@@ -11,7 +8,6 @@ import cartReducer, {
   cartIncrement,
   cartDecrement,
   cartDelete,
-  cartRestock,
 } from '../store/cart-slice.js';
 import productReducer, {
   getProducts,
@@ -19,28 +15,14 @@ import productReducer, {
   decrementItem,
   deleteFromCart,
   getOneProduct,
-  debugRestock,
 } from '../store/product-slice.js';
 const sampleData = require('../data/db.json');
 
 describe('reducer', () => {
-  const cartHelper = (state, payload, actionType) => {
-    const newState = cartReducer(state, {
-      type: actionType,
-      payload: payload,
-    });
-
-    return newState;
-  };
-
-  const productHelper = (state, payload, actionType) => {
-    const newState = productReducer(state, {
-      type: actionType,
-      payload: payload,
-    });
-
-    return newState;
-  };
+  const productMap = new Map();
+  sampleData.products.forEach((product) => {
+    productMap.set(product._id, product);
+  });
 
   const incrementHelper = (state, payload) => {
     let resState = cartReducer(
@@ -59,10 +41,43 @@ describe('reducer', () => {
     return resState;
   };
 
+  const decrementHelper = (state, payload) => {
+    let resState = cartReducer(
+      state,
+      cartDecrement(state.cart.get(payload._id))
+    );
+    let prevProd = state.products.get(payload._id);
+    resState = productReducer(
+      resState,
+      decrementItem({
+        ...prevProd,
+        stock: prevProd.stock + 1,
+      })
+    );
+
+    return resState;
+  };
+
+  it('can return a product map after passing in an array of products', () => {
+    const newState = productReducer({}, getProducts(sampleData.products));
+    expect(newState.products).toMatchObject(productMap);
+  });
+
+  it('view one product', () => {
+    let newState = productReducer({}, getProducts(sampleData.products));
+    newState = productReducer(newState, getOneProduct(sampleData.products[1]));
+    expect(newState.activeProduct).toMatchObject(sampleData.products[1]);
+  });
+
+  it('can return an array of categories after passing in an array of categories', () => {
+    const newState = categoryReducer({}, getCategories(sampleData.categories));
+    expect(newState.categories).toMatchObject(sampleData.categories);
+  });
+
   it('can change category', () => {
     sampleData.categories.forEach((category) => {
-      const newState = changeCategory(category);
-      expect(newState.payload).toBe(category);
+      const newState = categoryReducer({}, changeCategory(category));
+      expect(newState.currentCategory).toBe(category);
     });
   });
 
@@ -80,11 +95,6 @@ describe('reducer', () => {
   });
 
   it('can increment, decrement, and delete items', () => {
-    const productMap = new Map();
-    sampleData.products.forEach((product) => {
-      productMap.set(product._id, product);
-    });
-
     let newState = incrementHelper(
       {
         cart: new Map(),
@@ -108,98 +118,38 @@ describe('reducer', () => {
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(5);
 
-    //   newState = cartHelper(
-    //     newState,
-    //     newState.cart.get(sampleData.products[0]._id),
-    //     'INCREMENT_ITEM'
-    //   );
+    expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
+      sampleData.products[0].stock - 3
+    );
+    expect(newState.products.get(sampleData.products[1]._id).stock).toBe(
+      sampleData.products[1].stock - 1
+    );
+    expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
+      sampleData.products[2].stock - 1
+    );
 
-    //   prevProd = newState.products.get(sampleData.products[0]._id);
-    //   newState = productHelper(
-    //     newState,
-    //     {
-    //       ...prevProd,
-    //       stock: prevProd.stock - 1,
-    //     },
-    //     'INCREMENT_ITEM'
-    //   );
+    newState = incrementHelper(newState, sampleData.products[0]);
+    expect(newState.cart.size).toBe(3);
+    expect(newState.cartCount).toBe(6);
 
-    //   expect(newState.cart.size).toBe(3);
-    //   expect(newState.cartCount).toBe(5);
+    let itemToDelete = newState.cart.get(sampleData.products[0]._id);
+    newState = cartReducer(newState, cartDelete(itemToDelete));
+    newState = productReducer(newState, deleteFromCart(itemToDelete));
+    expect(newState.cart.size).toBe(2);
+    expect(newState.cartCount).toBe(2);
 
-    //   expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
-    //     sampleData.products[0].stock - 3
-    //   );
-    //   expect(newState.products.get(sampleData.products[1]._id).stock).toBe(
-    //     sampleData.products[1].stock - 1
-    //   );
-    //   expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
-    //     sampleData.products[2].stock - 1
-    //   );
+    newState = decrementHelper(newState, sampleData.products[1]);
+    expect(newState.cart.size).toBe(1);
+    expect(newState.cartCount).toBe(1);
 
-    //   newState = cartHelper(
-    //     newState,
-    //     newState.cart.get(sampleData.products[1]._id),
-    //     'INCREMENT_ITEM'
-    //   );
-    //   newState = productHelper(
-    //     newState,
-    //     newState.products.get(sampleData.products[1]._id),
-    //     'INCREMENT_ITEM'
-    //   );
-    //   expect(newState.cart.size).toBe(3);
-    //   expect(newState.cartCount).toBe(6);
+    itemToDelete = newState.cart.get(sampleData.products[2]._id);
+    newState = cartReducer(newState, cartDelete(itemToDelete));
+    newState = productReducer(newState, deleteFromCart(itemToDelete));
+    expect(newState.cart.size).toBe(0);
+    expect(newState.cartCount).toBe(0);
 
-    //   let itemToDelete = { ...newState.cart.get(sampleData.products[0]._id) };
-    //   newState = cartHelper(
-    //     newState,
-    //     newState.cart.get(sampleData.products[0]._id),
-    //     'DELETE_FROM_CART'
-    //   );
-    //   newState = productHelper(newState, itemToDelete, 'DELETE_FROM_CART');
-    //   expect(newState.cart.size).toBe(2);
-    //   expect(newState.cartCount).toBe(3);
-    //   expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
-    //     sampleData.products[0].stock
-    //   );
-
-    //   newState = cartHelper(
-    //     newState,
-    //     newState.cart.get(sampleData.products[1]._id),
-    //     'DECREMENT_ITEM'
-    //   );
-    //   newState = productHelper(
-    //     newState,
-    //     newState.products.get(sampleData.products[1]._id),
-    //     'DECREMENT_ITEM'
-    //   );
-    //   expect(newState.cart.size).toBe(2);
-    //   expect(newState.cartCount).toBe(2);
-
-    //   newState = cartHelper(
-    //     newState,
-    //     newState.cart.get(sampleData.products[1]._id),
-    //     'DECREMENT_ITEM'
-    //   );
-    //   newState = productHelper(
-    //     newState,
-    //     newState.products.get(sampleData.products[1]._id),
-    //     'DECREMENT_ITEM'
-    //   );
-    //   expect(newState.cart.size).toBe(1);
-    //   expect(newState.cartCount).toBe(1);
-
-    //   itemToDelete = { ...newState.cart.get(sampleData.products[2]._id) };
-    //   newState = cartHelper(
-    //     newState,
-    //     newState.cart.get(sampleData.products[2]._id),
-    //     'DELETE_FROM_CART'
-    //   );
-    //   newState = productHelper(newState, itemToDelete, 'DELETE_FROM_CART');
-    //   expect(newState.cart.size).toBe(0);
-    //   expect(newState.cartCount).toBe(0);
-    //   expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
-    //     sampleData.products[2].stock
-    //   );
+    expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
+      sampleData.products[2].stock
+    );
   });
 });
