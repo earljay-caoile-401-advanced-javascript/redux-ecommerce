@@ -14,7 +14,6 @@ import {
   CardMedia,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import '../styles/simpleCart.scss';
 
 const addresses = [
