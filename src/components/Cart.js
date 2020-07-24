@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  CardMedia,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -180,7 +181,13 @@ function Cart(props) {
             <Typography variant="h4">Your cart appears to be empty!</Typography>
           </Grid>
           <Grid item>
-            <SentimentVeryDissatisfiedIcon className="bigger-smiley" />
+            <CardMedia
+              component="img"
+              alt={`out of stock image`}
+              image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg?w=1000&h=600&crop=1"
+              title="empty stock image"
+              style={{ margin: '2em auto' }}
+            />
           </Grid>
           <Grid item>
             <Link to="/" className="no-style">

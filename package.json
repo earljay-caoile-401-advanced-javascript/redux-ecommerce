@@ -1,6 +1,6 @@
 {
   "name": "redux-ecommerce",
-  "version": "2.1.0",
+  "version": "4.1.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
