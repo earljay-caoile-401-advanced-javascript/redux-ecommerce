@@ -1,7 +1,7 @@
 @import 'variables';
 
 #cart-list-header {
-  padding-left: 0;
+  padding-left: $spacing;
   padding-right: $spacing;
 }
 
@@ -23,9 +23,18 @@
     font-size: 55px;
   }
 
-  #back-to-shopping-btn {
+  .bigger-smiley {
+    font-size: 110px;
+  }
+
+  .back-to-shopping-btn {
     svg {
       margin-right: $spacing / 4;
     }
+  }
+
+  .bigger-back-to-shopping {
+    padding: $spacing $spacing * 3;
+    margin: $spacing;
   }
 }

@@ -1,139 +1,120 @@
 'use strict';
 
-import categoryReducer from '../store/categoryStore';
-import cartReducer from '../store/cartStore';
-import productReducer from '../store/productStore';
+import categoryReducer, {
+  getCategories,
+  changeCategory,
+} from '../store/category-slice.js';
+import cartReducer, {
+  cartIncrement,
+  cartDecrement,
+  cartDelete,
+} from '../store/cart-slice.js';
+import productReducer, {
+  getProducts,
+  incrementItem,
+  decrementItem,
+  deleteFromCart,
+  getOneProduct,
+} from '../store/product-slice.js';
 const sampleData = require('../data/db.json');
 
 describe('reducer', () => {
-  const cartHelper = (state, payload, actionType) => {
-    const newState = cartReducer(state, {
-      type: actionType,
-      payload: payload,
-    });
+  const productMap = new Map();
+  sampleData.products.forEach((product) => {
+    productMap.set(product._id, product);
+  });
 
-    return newState;
+  const incrementHelper = (state, payload) => {
+    let resState = cartReducer(
+      state,
+      cartIncrement(state.cart.get(payload._id) || payload)
+    );
+    let prevProd = state.products.get(payload._id) || payload;
+    resState = productReducer(
+      resState,
+      incrementItem({
+        ...prevProd,
+        stock: prevProd.stock - 1,
+      })
+    );
+
+    return resState;
   };
 
-  const productHelper = (state, payload, actionType) => {
-    const newState = productReducer(state, {
-      type: actionType,
-      payload: payload,
-    });
+  const decrementHelper = (state, payload) => {
+    let resState = cartReducer(
+      state,
+      cartDecrement(state.cart.get(payload._id))
+    );
+    let prevProd = state.products.get(payload._id);
+    resState = productReducer(
+      resState,
+      decrementItem({
+        ...prevProd,
+        stock: prevProd.stock + 1,
+      })
+    );
 
-    return newState;
+    return resState;
   };
+
+  it('can return a product map after passing in an array of products', () => {
+    const newState = productReducer({}, getProducts(sampleData.products));
+    expect(newState.products).toMatchObject(productMap);
+  });
+
+  it('view one product', () => {
+    let newState = productReducer({}, getProducts(sampleData.products));
+    newState = productReducer(newState, getOneProduct(sampleData.products[1]));
+    expect(newState.activeProduct).toMatchObject(sampleData.products[1]);
+  });
+
+  it('can return an array of categories after passing in an array of categories', () => {
+    const newState = categoryReducer({}, getCategories(sampleData.categories));
+    expect(newState.categories).toMatchObject(sampleData.categories);
+  });
 
   it('can change category', () => {
     sampleData.categories.forEach((category) => {
-      const newState = categoryReducer(
-        {},
-        { type: 'CHANGE_CATEGORY', payload: category }
-      );
+      const newState = categoryReducer({}, changeCategory(category));
       expect(newState.currentCategory).toBe(category);
     });
   });
 
   it('can add to cart', () => {
     let newState = cartReducer(
-      {
-        cart: new Map(),
-        cartCount: 0,
-      },
-      {
-        type: 'ADD_TO_CART',
-        payload: sampleData.products[0],
-      }
+      { cart: new Map(), cartCount: 0 },
+      cartIncrement(sampleData.products[0])
     );
-
     expect(newState.cart.size).toBe(1);
+    expect(newState.cartCount).toBe(1);
 
-    newState = cartHelper(newState, sampleData.products[1], 'ADD_TO_CART');
+    newState = cartReducer(newState, cartIncrement(sampleData.products[1]));
     expect(newState.cart.size).toBe(2);
     expect(newState.cartCount).toBe(2);
   });
 
   it('can increment, decrement, and delete items', () => {
-    const productMap = new Map();
-    sampleData.products.forEach((product) => {
-      productMap.set(product._id, product);
-    });
-
-    let newState = cartReducer(
+    let newState = incrementHelper(
       {
         cart: new Map(),
         cartCount: 0,
         products: productMap,
+        activeProduct: {},
       },
-      {
-        type: 'ADD_TO_CART',
-        payload: sampleData.products[0],
-      }
+      sampleData.products[0]
     );
 
-    newState = productHelper(
-      newState,
-      {
-        ...sampleData.products[0],
-        stock: sampleData.products[0].stock - 1,
-      },
-      'ADD_TO_CART'
-    );
-
-    newState = cartHelper(newState, sampleData.products[1], 'ADD_TO_CART');
-    newState = productHelper(
-      newState,
-      {
-        ...sampleData.products[1],
-        stock: sampleData.products[1].stock - 1,
-      },
-      'ADD_TO_CART'
-    );
-    newState = cartHelper(newState, sampleData.products[2], 'ADD_TO_CART');
-    newState = productHelper(
-      newState,
-      {
-        ...sampleData.products[2],
-        stock: sampleData.products[2].stock - 1,
-      },
-      'ADD_TO_CART'
-    );
+    newState = incrementHelper(newState, sampleData.products[1]);
+    newState = incrementHelper(newState, sampleData.products[2]);
     expect(newState.cart.size).toBe(3);
+    expect(newState.cartCount).toBe(3);
 
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[0]._id),
-      'INCREMENT_ITEM'
-    );
-
-    let prevProd = newState.products.get(sampleData.products[0]._id);
-    newState = productHelper(
-      newState,
-      {
-        ...prevProd,
-        stock: prevProd.stock - 1,
-      },
-      'INCREMENT_ITEM'
-    );
+    newState = incrementHelper(newState, sampleData.products[0]);
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(4);
 
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[0]._id),
-      'INCREMENT_ITEM'
-    );
-
-    prevProd = newState.products.get(sampleData.products[0]._id);
-    newState = productHelper(
-      newState,
-      {
-        ...prevProd,
-        stock: prevProd.stock - 1,
-      },
-      'INCREMENT_ITEM'
-    );
-
+    newState = incrementHelper(newState, sampleData.products[0]);
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(5);
 
@@ -147,67 +128,26 @@ describe('reducer', () => {
       sampleData.products[2].stock - 1
     );
 
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[1]._id),
-      'INCREMENT_ITEM'
-    );
-    newState = productHelper(
-      newState,
-      newState.products.get(sampleData.products[1]._id),
-      'INCREMENT_ITEM'
-    );
+    newState = incrementHelper(newState, sampleData.products[0]);
     expect(newState.cart.size).toBe(3);
     expect(newState.cartCount).toBe(6);
 
-    let itemToDelete = { ...newState.cart.get(sampleData.products[0]._id) };
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[0]._id),
-      'DELETE_FROM_CART'
-    );
-    newState = productHelper(newState, itemToDelete, 'DELETE_FROM_CART');
-    expect(newState.cart.size).toBe(2);
-    expect(newState.cartCount).toBe(3);
-    expect(newState.products.get(sampleData.products[0]._id).stock).toBe(
-      sampleData.products[0].stock
-    );
-
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[1]._id),
-      'DECREMENT_ITEM'
-    );
-    newState = productHelper(
-      newState,
-      newState.products.get(sampleData.products[1]._id),
-      'DECREMENT_ITEM'
-    );
+    let itemToDelete = newState.cart.get(sampleData.products[0]._id);
+    newState = cartReducer(newState, cartDelete(itemToDelete));
+    newState = productReducer(newState, deleteFromCart(itemToDelete));
     expect(newState.cart.size).toBe(2);
     expect(newState.cartCount).toBe(2);
 
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[1]._id),
-      'DECREMENT_ITEM'
-    );
-    newState = productHelper(
-      newState,
-      newState.products.get(sampleData.products[1]._id),
-      'DECREMENT_ITEM'
-    );
+    newState = decrementHelper(newState, sampleData.products[1]);
     expect(newState.cart.size).toBe(1);
     expect(newState.cartCount).toBe(1);
 
-    itemToDelete = { ...newState.cart.get(sampleData.products[2]._id) };
-    newState = cartHelper(
-      newState,
-      newState.cart.get(sampleData.products[2]._id),
-      'DELETE_FROM_CART'
-    );
-    newState = productHelper(newState, itemToDelete, 'DELETE_FROM_CART');
+    itemToDelete = newState.cart.get(sampleData.products[2]._id);
+    newState = cartReducer(newState, cartDelete(itemToDelete));
+    newState = productReducer(newState, deleteFromCart(itemToDelete));
     expect(newState.cart.size).toBe(0);
     expect(newState.cartCount).toBe(0);
+
     expect(newState.products.get(sampleData.products[2]._id).stock).toBe(
       sampleData.products[2].stock
     );

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Drawer,
-  IconButton,
   Typography,
   Divider,
   List,
@@ -12,8 +11,6 @@ import {
   Button,
   Grid,
 } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CakeIcon from '@material-ui/icons/Cake';
 import DevicesIcon from '@material-ui/icons/Devices';
@@ -25,16 +22,22 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import '../styles/simpleCart.scss';
-import * as actions from '../store/products-actions';
+import { increment, decrement, remove } from '../store/product-slice.js';
+
 import axios from 'axios';
 
 /**
- * Component that renders a list of cart items. Allows users to increment, decrement, and delete
- * @param {Object} props - props passed on from the Header component
+ * Component that renders a list of cart items. Allows users to increment, decrement, and delete.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SimpleCart />
+ * )
  */
 function SimpleCart(props) {
   const [reqIsPending, setReqIsPending] = useState(false);
-  const { cart } = props;
+  const { cart, increment, decrement, remove } = props;
 
   axios.interceptors.response.use(
     function (response) {
@@ -51,9 +54,9 @@ function SimpleCart(props) {
 
   let totalCost = 0;
   if (cart) {
-    cart.forEach((value, key) => {
+    cart.forEach((item, key) => {
       let itemIcon;
-      switch (value.category) {
+      switch (item.category) {
         case 'mythical_weapons':
           itemIcon = <ColorizeIcon />;
           break;
@@ -71,20 +74,20 @@ function SimpleCart(props) {
           break;
       }
 
-      totalCost += value.price * value.quantity;
+      totalCost += item.price * item.quantity;
 
       cartListToRender.push(
         <ListItem key={key} className="fade-in">
           <ListItemIcon>{itemIcon}</ListItemIcon>
           <ListItemText
-            primary={value.displayName || value.name}
-            secondary={value.quantity}
+            primary={item.displayName || item.name}
+            secondary={item.quantity}
           />
           <Button
-            disabled={!value.stock || reqIsPending}
+            disabled={!item.stock || reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              props.incrementItem(value);
+              increment(item);
             }}
           >
             <ArrowUpwardIcon className="item-change" />
@@ -93,7 +96,7 @@ function SimpleCart(props) {
             disabled={reqIsPending}
             onClick={() => {
               setReqIsPending(true);
-              props.decrementItem(value);
+              decrement(item);
             }}
           >
             <ArrowDownwardIcon className="item-change" />
@@ -101,7 +104,7 @@ function SimpleCart(props) {
           <Button
             color="secondary"
             onClick={() => {
-              props.removeItem(value);
+              remove(item);
             }}
           >
             <DeleteForeverIcon />
@@ -125,13 +128,6 @@ function SimpleCart(props) {
       }}
     >
       <div className={props.classes.drawerHeader} id="cart-list-header">
-        <IconButton onClick={() => props.setOpenRight(false)}>
-          {props.theme.direction === 'rtl' ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
         <Grid
           container
           direction="row"
@@ -166,7 +162,7 @@ function SimpleCart(props) {
               variant="contained"
               color="primary"
               onClick={() => props.setOpenRight(false)}
-              id="back-to-shopping-btn"
+              className="back-to-shopping-btn"
             >
               <ArrowBackIcon />
               <Typography variant="h6">Return to Shopping</Typography>
@@ -185,10 +181,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  incrementItem: (data) => dispatch(actions.increment(data)),
-  decrementItem: (data) => dispatch(actions.decrement(data)),
-  removeItem: (data) => dispatch(actions.remove(data)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   incrementItem: (data) => dispatch(actions.increment(data)),
+//   decrementItem: (data) => dispatch(actions.decrement(data)),
+//   removeItem: (data) => dispatch(actions.remove(data)),
+// });
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  remove,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

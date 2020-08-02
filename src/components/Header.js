@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
 import SimpleCart from './SimpleCart';
@@ -16,6 +17,9 @@ import {
   Divider,
   SwipeableDrawer,
 } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -106,12 +110,25 @@ function Header(props) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button key={'cart'} onClick={() => setOpenRight(true)}>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary={`Cart: (${props.cartCount})`} />
-        </ListItem>
+        <Link to="/" className="no-style">
+          <ListItem button key={'home'}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary={`Home`} style={{ color: 'gray' }} />
+          </ListItem>
+        </Link>
+        <Link to="/cart" className="no-style">
+          <ListItem button key={'cart'}>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={`Cart (${props.cartCount})`}
+              style={{ color: 'gray' }}
+            />
+          </ListItem>
+        </Link>
       </List>
       <Divider />
       <List>
@@ -153,13 +170,25 @@ function Header(props) {
           {collapseNavList()}
         </SwipeableDrawer>
         <Typography variant="h6" className={classes.title}>
-          Dat Online Store
+          <Link to="/" className="no-style">
+            Dat Online Store
+          </Link>
         </Typography>
-        <Button
-          color="inherit"
-          id="nav-cart"
-          onClick={() => setOpenRight(!openRight)}
-        >{`Cart (${props.cartCount})`}</Button>
+        <div id="nav-cart">
+          <Link to="/cart" className="no-style">
+            <Button
+              color="inherit"
+              id="nav-cart"
+            >{`Cart (${props.cartCount})`}</Button>
+          </Link>
+          <IconButton onClick={() => setOpenRight(!openRight)}>
+            {openRight ? (
+              <ChevronRightIcon style={{ color: 'white' }} />
+            ) : (
+              <ChevronLeftIcon style={{ color: 'white' }} />
+            )}
+          </IconButton>
+        </div>
       </Toolbar>
       <SimpleCart
         theme={theme}

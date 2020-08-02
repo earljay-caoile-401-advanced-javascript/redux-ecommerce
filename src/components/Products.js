@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { getAll, increment, restock } from '../store/product-slice.js';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardActionArea,
@@ -10,15 +12,14 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
-import * as actions from '../store/products-actions';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
 import sampleData from '../data/db.json';
 const lastProd = sampleData.products[sampleData.products.length - 1];
 
 /**
- * Component that renders the list of products as cards
- * Grabs the products and currentCategory states from the Redux store to map state to props.
+ * Component that renders the list of products as cards. Grabs the products and currentCategory
+ * states from the Redux store to map state to props.
  *
  * @component
  * @example
@@ -27,7 +28,7 @@ const lastProd = sampleData.products[sampleData.products.length - 1];
  * )
  */
 function Products(props) {
-  const { getProducts, products, currentCategory } = props;
+  const { products, currentCategory, getAll, increment, restock } = props;
   const [reqIsPending, setReqIsPending] = useState(false);
   const [fetchingGet, setFetchingGet] = useState(false);
 
@@ -53,13 +54,13 @@ function Products(props) {
   );
 
   useEffect(() => {
-    getProducts();
     setFetchingGet(true);
-  }, [getProducts]);
+    getAll();
+  }, [getAll]);
 
   const prodsToRender = [];
 
-  if (products) {
+  if (products && currentCategory) {
     products.forEach((product, i) => {
       if (product.category === currentCategory.name) {
         prodsToRender.push(
@@ -69,8 +70,8 @@ function Products(props) {
                 <CardMedia
                   component="img"
                   alt={`Image of ${product.displayName || product.name}`}
-                  height="140"
-                  image="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg?w=1000&h=600&crop=1"
+                  height="200"
+                  image={require(`../assets/${product.name}.jpg`)}
                   title={product.displayName || product.name}
                 />
                 <CardContent>
@@ -96,14 +97,16 @@ function Products(props) {
                   disabled={!product.stock || reqIsPending}
                   onClick={() => {
                     setReqIsPending(true);
-                    props.addToCart(product);
+                    increment(product);
                   }}
                 >
                   Add to Cart
                 </Button>
-                <Button size="small" color="primary">
-                  View Details
-                </Button>
+                <Link to={`/products/${product._id}`} className="no-style">
+                  <Button size="small" color="primary">
+                    View Details
+                  </Button>
+                </Link>
               </CardActions>
             </Card>
           </Grid>
@@ -129,7 +132,7 @@ function Products(props) {
             style={{ margin: '10em auto' }}
             onClick={() => {
               setFetchingGet(true);
-              props.restock();
+              restock();
             }}
           >
             Debug Button: Restock Inventory and Clear Cart
@@ -143,15 +146,15 @@ function Products(props) {
 const mapStateToProps = (state) => {
   return {
     products: state.productStore.products,
+    activeProduct: state.productStore.activeProduct,
     currentCategory: state.categoryStore.currentCategory,
     cartCount: state.cartStore.cartCount,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getProducts: () => dispatch(actions.get()),
-  addToCart: (data) => dispatch(actions.increment(data)),
-  restock: () => dispatch(actions.restock()),
-});
-
+const mapDispatchToProps = {
+  getAll,
+  increment,
+  restock,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

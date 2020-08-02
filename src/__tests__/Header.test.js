@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
 import { mount } from 'enzyme';
 import Header from '../components/Header';
 import { Provider } from 'react-redux';
@@ -10,7 +12,9 @@ describe('header component', () => {
   it('displays the proper html and text on render', () => {
     const component = mount(
       <Provider store={store}>
-        <Header />
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
       </Provider>
     );
     expect(component).toBeDefined();
